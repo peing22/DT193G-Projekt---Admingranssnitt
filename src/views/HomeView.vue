@@ -51,10 +51,11 @@ export default {
         // Skickar felmeddelande
         this.message = "Du har angett felaktiga uppgifter";
 
-      // Skickar token från respons till auth i stores
+      // Skickar token och name från respons till auth i stores
       } else {
         let token = data.token;
-        useAuthStore().setToken(token);
+        let name = data.name;
+        useAuthStore().setUser(token, name);
 
         // Tömmer inputfälten
         this.email = "";

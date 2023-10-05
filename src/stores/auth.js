@@ -5,16 +5,19 @@ export const useAuthStore = defineStore('auth', {
     state: () => ({
 
         // Hämtar token från Local Storage
-        token: JSON.parse(localStorage.getItem('token'))
+        token: JSON.parse(localStorage.getItem('token')),
+        name: JSON.parse(localStorage.getItem('name'))
     }),
     actions: {
-        setToken(token) {
+        setUser(token, name) {
 
-            // Sätter token för state
+            // Sätter token och name för state
             this.token = token;
+            this.name = name;
 
-            // Lagrar token i Local Storage
+            // Lagrar token och name i Local Storage
             localStorage.setItem('token', JSON.stringify(token));
+            localStorage.setItem('name', JSON.stringify(name));
 
             // Skickar vidare till produktsidan
             router.push('/produkter');
@@ -30,11 +33,13 @@ export const useAuthStore = defineStore('auth', {
             });
             const data = await resp.json();
 
-            // Sätter token för state till null
+            // Sätter token och name för state till null
             this.token = null;
+            this.name = null;
 
-            // Tar bort token från Local Storage
+            // Tar bort token och name från Local Storage
             localStorage.removeItem('token');
+            localStorage.removeItem('name');
 
             // Skickar vidare till startsidan
             router.push('/');
