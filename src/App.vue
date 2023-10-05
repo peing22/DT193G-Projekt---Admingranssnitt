@@ -1,5 +1,5 @@
 <template>
-  <Header />
+  <Header v-if="showHeader" />
   <RouterView />
 </template>
 
@@ -11,6 +11,13 @@ export default {
   components: {
     Header,
     RouterView
+  },
+  computed: {
+
+    // Visar header om namnet på routen inte är home
+    showHeader() {
+      return this.$route.name !== 'home';
+    }
   }
 }
 </script>
