@@ -9,6 +9,7 @@
     <br>
     <input type="submit" value="Logga in">
   </form>
+  <p class="font-bold text-red-700">{{ message }}</p>
 </template>
 
 <script>
@@ -18,16 +19,22 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      message: ""
     }
   },
   methods: {
+
+    // Loggar in användare
     async loginUser() {
+
+      // Lagrar angivna värden i variabel
       let userBody = {
         email: this.email,
         password: this.password
       }
 
+      // Gör fetch-anrop och skickar med angivna värden
       const resp = await fetch("http://127.0.0.1:8000/api/login", {
         method: "POST",
         headers: {
@@ -38,12 +45,18 @@ export default {
       });
       const data = await resp.json();
 
+      // Om responsen innehåller felmeddelanden
       if (data.message === 'Validation error' || data.message === 'Wrong email and/or password') {
-        alert("Felaktiga uppgifter!");
+
+        // Skickar felmeddelande
+        this.message = "Du har angett felaktiga uppgifter";
+
+      // Skickar token från respons till auth i stores
       } else {
         let token = data.token;
         useAuthStore().setToken(token);
 
+        // Tömmer inputfälten
         this.email = "";
         this.password = "";
       }
