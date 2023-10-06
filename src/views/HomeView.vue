@@ -13,7 +13,8 @@
 </template>
 
 <script>
-import { useAuthStore } from '../stores/auth';
+import { useAuthStore } from '../stores/auth'
+import config from '../config'
 
 export default {
   data() {
@@ -35,7 +36,7 @@ export default {
       }
 
       // Gör fetch-anrop och skickar med angivna värden
-      const resp = await fetch("http://127.0.0.1:8000/api/login", {
+      const resp = await fetch(config.apiUrl + "api/login", {
         method: "POST",
         headers: {
           "Accept": "application/json",

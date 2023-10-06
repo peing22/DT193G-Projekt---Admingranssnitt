@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import router from '../router'
+import config from '../config'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -25,7 +26,7 @@ export const useAuthStore = defineStore('auth', {
         async logoutUser() {
 
             // Loggar ut användare
-            const resp = await fetch("http://127.0.0.1:8000/api/logout", {
+            const resp = await fetch(config.apiUrl + "api/logout", {
                 method: "POST",
                 headers: {
                     "Authorization": "Bearer " + this.token
