@@ -11,15 +11,28 @@
 import CategorySelector from '../components/CategorySelector.vue'
 import ProductList from '../components/ProductList.vue'
 import { useAuthStore } from '../stores/auth'
+import config from '../config'
+
 
 export default {
   data() {
     return {
-      url: "http://127.0.0.1:8000/",
+      // Lagrar URL till API
+      url: config.apiUrl,
+
+      // Lagrar produktkategorier
       categories: [],
+
+      // Lagrar tom textsträng eller vald kategori
       selectedCategory: "",
+
+      // Lagrar samtliga produkter
       products: [],
+
+      // Lagrar valda produkter utifrån kategori
       selectedProducts: [],
+
+      // Lagrar token
       token: useAuthStore().$state.token
     }
   },
@@ -29,8 +42,11 @@ export default {
   },
   computed: {
     showProducts() {
+      // Returnerar samtliga produkter om selectedCategory är tom
       if (this.selectedCategory === "") {
         return this.products;
+      
+      // Returnerar produkter för vald kategori
       } else {
         return this.selectedProducts;
       }
@@ -38,7 +54,10 @@ export default {
   },
   methods: {
     async fetchData() {
+      // Gör två parallella fetch-anrop
       const [categoriesResp, productsResp] = await Promise.all([
+
+      // Hämtar kategorier
         fetch(this.url + "api/category", {
           method: "GET",
           headers: {
@@ -47,6 +66,7 @@ export default {
             "Authorization": "Bearer " + this.token
           }
         }),
+        // Hämtar produkter
         fetch(this.url + "api/product", {
           method: "GET",
           headers: {
@@ -56,23 +76,33 @@ export default {
           }
         })
       ]);
+      // Extraherar och analyserar JSON-responsen
       const [categoriesData, productsData] = await Promise.all([
         categoriesResp.json(),
         productsResp.json()
       ]);
+
+      // Uppdaterar categories och products med hämtad data
       this.categories = categoriesData;
       this.products = productsData;
     },
     updateSelectedCategory(category) {
+      // Uppdaterar selectedCategory med id för vald kategori
       this.selectedCategory = category;
+
+      // Om id inte är en tom textsträng
       if (category !== "") {
-        let categoryId = this.selectedCategory;
+
+        // Lagrar alla produkter i en variabel
         let products = this.products;
-        this.selectedProducts = products.filter(product => product.category_id.toString() === categoryId);
+
+        // Uppdaterar selectedProducts med en array filtrerad efter vald kategori
+        this.selectedProducts = products.filter(product => product.category_id.toString() === category);
       }
     }
   },
   mounted() {
+    // Anropar metod
     this.fetchData();
   }
 }
