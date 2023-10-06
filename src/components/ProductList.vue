@@ -5,7 +5,7 @@
         <p v-if="product.description !== null">{{ product.description }}</p>
         <p v-if="product.price !== null">Pris: {{ product.price }} kr</p>
         <label for="quantity">Antal: </label>
-        <input type="number" name="quantity" v-model="product.quantity" @change="updateQuantity(product)">
+        <input type="number" id="quantity" v-model="product.quantity" @change="updateQuantity(product)">
         <br>
     </div>
 </template>
@@ -27,7 +27,7 @@ export default {
     },
     methods: {
         getProductImageUrl(imagePath) {
-            
+
             // Returnerar sökvägen till bilden om imagePath inte är null
             if (imagePath !== null) {
                 return config.apiUrl + imagePath;
