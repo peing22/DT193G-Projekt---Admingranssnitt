@@ -17,9 +17,6 @@ import config from '../config'
 export default {
   data() {
     return {
-      // Lagrar URL till API
-      url: config.apiUrl,
-
       // Lagrar produktkategorier
       categories: [],
 
@@ -58,7 +55,7 @@ export default {
       const [categoriesResp, productsResp] = await Promise.all([
 
       // Hämtar kategorier
-        fetch(this.url + "api/category", {
+        fetch(config.apiUrl + "api/category", {
           method: "GET",
           headers: {
             "Accept": "application/json",
@@ -67,7 +64,7 @@ export default {
           }
         }),
         // Hämtar produkter
-        fetch(this.url + "api/product", {
+        fetch(config.apiUrl + "api/product", {
           method: "GET",
           headers: {
             "Accept": "application/json",
