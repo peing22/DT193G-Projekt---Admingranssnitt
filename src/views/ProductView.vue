@@ -29,9 +29,6 @@ export default {
   },
   computed: {
     showProducts() {
-      // Alternativt sätt
-      // return this.products;
-
       if (this.selectedCategory === "") {
         return this.products;
       } else {
@@ -69,44 +66,11 @@ export default {
     updateSelectedCategory(category) {
       this.selectedCategory = category;
       if (category !== "") {
-        // Alternativt sätt
-        //   this.getProductsByCat();
-
         let categoryId = this.selectedCategory;
         let products = this.products;
         this.selectedProducts = products.filter(product => product.category_id.toString() === categoryId);
       }
-      // Alternativt sätt
-      // else {
-      //   this.getProducts();
-      // }
     }
-    // Alternativt sätt
-    // ,
-    // async getProductsByCat() {
-    //   const resp = await fetch(this.url + "api/productsbycat/" + this.selectedCategory, {
-    //     method: "GET",
-    //     headers: {
-    //       "Accept": "application/json",
-    //       "Content-type": "application/json",
-    //       "Authorization": "Bearer " + this.token
-    //     }
-    //   });
-    //   const data = await resp.json();
-    //   this.products = data.products;
-    // },
-    // async getProducts() {
-    //   const resp = await fetch(this.url + "api/product", {
-    //     method: "GET",
-    //     headers: {
-    //       "Accept": "application/json",
-    //       "Content-type": "application/json",
-    //       "Authorization": "Bearer " + this.token
-    //     }
-    //   });
-    //   const data = await resp.json();
-    //   this.products = data;
-    // }
   },
   mounted() {
     this.fetchData();
