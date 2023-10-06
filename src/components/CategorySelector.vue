@@ -1,7 +1,8 @@
 <template>
     <div>
-        <select :value="selectedCategory" @input="updateSelectedCategory">
-            <option value="">Visa alla</option>
+        <label for="show">Visa: </label>
+        <select name="show" :value="selectedCategory" @input="updateSelectedCategory">
+            <option value="">Alla</option>
             <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
         </select>
     </div>
@@ -15,6 +16,8 @@ export default {
     },
     methods: {
         updateSelectedCategory(event) {
+
+            // Skickar händelse och värde vidare till föräldrakomponent
             this.$emit('update:selectedCategory', event.target.value);
         }
     }

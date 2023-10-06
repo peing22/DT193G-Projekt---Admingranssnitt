@@ -1,9 +1,9 @@
 <template>
     <div v-for="product in products" :key="product.id">
         <img :src="getProductImageUrl(product.image)" :alt="product.name">
-        <p>{{ product.name }}</p>
-        <p>{{ product.description }}</p>
-        <p>{{ product.price }}</p>
+        <p class="font-bold">{{ product.name }}</p>
+        <p v-if="product.description !== null">{{ product.description }}</p>
+        <p v-if="product.price !== null">Pris: {{ product.price }} kr</p>
         <label for="quantity">Antal: </label>
         <input type="number" name="quantity" v-model="product.quantity" @change="updateQuantity(product)">
         <br>
@@ -27,6 +27,7 @@ export default {
     },
     methods: {
         getProductImageUrl(imagePath) {
+            
             // Returnerar sökvägen till bilden om imagePath inte är null
             if (imagePath !== null) {
                 return config.apiUrl + imagePath;

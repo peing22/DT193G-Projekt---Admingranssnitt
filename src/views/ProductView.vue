@@ -39,6 +39,7 @@ export default {
   },
   computed: {
     showProducts() {
+
       // Returnerar samtliga produkter om selectedCategory är tom
       if (this.selectedCategory === "") {
         return this.products;
@@ -51,6 +52,7 @@ export default {
   },
   methods: {
     async fetchData() {
+
       // Gör två parallella fetch-anrop
       const [categoriesResp, productsResp] = await Promise.all([
 
@@ -84,6 +86,7 @@ export default {
       this.products = productsData;
     },
     updateSelectedCategory(category) {
+      
       // Uppdaterar selectedCategory med id för vald kategori
       this.selectedCategory = category;
 
