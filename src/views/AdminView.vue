@@ -26,6 +26,8 @@ export default {
     },
     methods: {
         async getCategories() {
+
+            // Hämtar samtliga kategorier
             const resp = await fetch(config.apiUrl + "api/category", {
                 method: "GET",
                 headers: {
@@ -35,10 +37,13 @@ export default {
                 }
             });
             const data = await resp.json();
+
+            // Sätter värde för categories
             this.categories = data;
         }
     },
     mounted() {
+        // Anropar metod
         this.getCategories();
     }
 }
