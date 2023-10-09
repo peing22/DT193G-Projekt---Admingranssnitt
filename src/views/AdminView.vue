@@ -1,7 +1,7 @@
 <template>
     <h1 class="font-bold">Administrera</h1>
     <h2 class="font-bold text-3xl">Produktkategorier</h2>
-    <AddCategory />
+    <AddCategory :token="token" />
     <h2 class="font-bold text-3xl">Produkter</h2>
     <AddProduct :categories="categories" :token="token" />
     <h2 class="font-bold text-3xl">Användarkonto</h2>

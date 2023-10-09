@@ -10,14 +10,15 @@
 </template>
 
 <script>
-import { useAuthStore } from '../stores/auth'
 import config from '../config'
 
 export default {
+    props: {
+        token: String
+    },
     data() {
         return {
             name: "",
-            token: useAuthStore().$state.token,
             message: "",
             errorMessage: ""
         }
