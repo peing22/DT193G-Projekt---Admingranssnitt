@@ -15,7 +15,7 @@
     <h2 class="font-bold text-3xl">Produkter</h2>
     <AddProduct :categories="categories" :token="token" />
     <br>
-    <h2 class="font-bold text-3xl">Användarkonto</h2>
+    <h2 class="font-bold text-3xl">Användarkonton</h2>
 </template>
 
 <script>
