@@ -51,6 +51,7 @@ export default {
     }
   },
   methods: {
+    // Hämtar kategorier och produkter
     async fetchData() {
 
       // Gör två parallella fetch-anrop
@@ -85,6 +86,7 @@ export default {
       this.categories = categoriesData;
       this.products = productsData;
     },
+    // Uppdaterar vald kategori
     updateSelectedCategory(category) {
       
       // Uppdaterar selectedCategory med id för vald kategori
