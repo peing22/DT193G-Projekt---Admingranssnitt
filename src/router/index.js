@@ -1,9 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ProductView from '../views/ProductView.vue'
-import AddView from '../views/AddView.vue'
-import EditView from '../views/EditView.vue'
-import RegisterView from '../views/RegisterView.vue'
+import AdminView from '../views/AdminView.vue'
 import { useAuthStore } from '../stores/auth'
 
 // Skapar routes till respektive vy
@@ -22,21 +20,9 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
     {
-      path: '/lagg-till',
-      name: 'lagg-till',
-      component: AddView,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/andra',
-      name: 'andra',
-      component: EditView,
-      meta: { requiresAuth: true }
-    },
-    {
-      path: '/registrera',
-      name: 'registrera',
-      component: RegisterView,
+      path: '/administrera',
+      name: 'administrera',
+      component: AdminView,
       meta: { requiresAuth: true }
     }
   ]

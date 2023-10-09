@@ -8,13 +8,7 @@
                     <RouterLink to="/produkter">Produkter</RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/lagg-till">Lägg till</RouterLink>
-                </li>
-                <li>
-                    <RouterLink to="/andra">Ändra</RouterLink>
-                </li>
-                <li>
-                    <RouterLink to="/registrera">Registrera</RouterLink>
+                    <RouterLink to="/administrera">Administrera</RouterLink>
                 </li>
             </ul>
         </nav>
