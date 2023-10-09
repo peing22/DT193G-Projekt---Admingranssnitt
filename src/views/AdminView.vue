@@ -2,7 +2,8 @@
     <h1 class="font-bold">Administrera</h1>
     <div>
         <h2 class="font-bold text-3xl">Produktkategorier</h2>
-        <Categories v-for="category in categories" :category="category" :key="category.id" @editCategory="editCategory" />
+        <Categories v-for="category in categories" :category="category" :key="category.id" @editCategory="editCategory"
+            @deleteCategory="deleteCategory" />
         <div v-if="editingCategory">
             <EditCategory :category="editingCategory" @categoryEdited="updateCategory" @cancelEdit="cancelEditCategory" />
         </div>
@@ -84,6 +85,24 @@ export default {
 
                 // Sätter editingCategory till null
                 this.editingCategory = null;
+            }
+        },
+        // Raderar vald kategori
+        async deleteCategory(category) {
+
+            // Gör fetch-anrop för att radera vald kategori
+            const resp = await fetch(config.apiUrl + 'api/category/' + category.id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json',
+                    'Authorization': 'Bearer ' + this.token,
+                },
+            });
+
+            // Anropar metor för att hämta kategorier på nytt om respons är OK
+            if (resp.ok) {
+                this.getCategories();
             }
         }
     },
