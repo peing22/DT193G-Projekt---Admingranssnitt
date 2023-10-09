@@ -23,6 +23,7 @@ export default {
             errorMessage: ""
         }
     },
+    emits: ['categoryAdded'],
     methods: {
         async addCategory() {
 
@@ -42,6 +43,9 @@ export default {
                 // Skickar meddelande om respons är OK
                 if (resp.ok) {
                     this.message = "Kategorin har lagts till!";
+
+                    // Anropar metod
+                    this.$emit("categoryAdded", data);
 
                     // Tömmer inputfält
                     this.name = "";
