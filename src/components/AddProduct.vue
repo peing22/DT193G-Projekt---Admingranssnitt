@@ -24,6 +24,7 @@
         <input type="submit" value="Lägg till">
     </form>
     <p class="font-bold text-green-700">{{ message }}</p>
+    <p class="font-bold text-red-700">{{ errorMessage }}</p>
 </template>
 
 <script>
@@ -42,7 +43,8 @@ export default {
             quantity: null,
             image: null,
             selectedCategory: "",
-            message: ""
+            message: "",
+            errorMessage: ""
         }
     },
     methods: {
@@ -94,6 +96,7 @@ export default {
                 // Om responsen är okej skickas meddelande och formuläret töms
                 if (resp.ok) {
                     this.message = "Produkten har lagts till!";
+                    this.errorMessage = "";
                     this.name = "";
                     this.descript = "";
                     this.price = null;
@@ -103,7 +106,7 @@ export default {
                 }
             // Skickar felmeddelande
             } else {
-                alert("Namn, antal och produktkategori måste anges!");
+                this.errorMessage = "Namn, antal och produktkategori måste anges!";
             }
         }
     }
