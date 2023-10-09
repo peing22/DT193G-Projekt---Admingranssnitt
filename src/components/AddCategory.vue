@@ -25,7 +25,7 @@ export default {
     methods: {
         async addCategory() {
 
-            // // Gör fetch-anrop och skickar med angivet värde om det inte är tomt
+            // Gör fetch-anrop och skickar med angivet värde om det inte är tomt
             if (this.name.trim() !== "") {
                 const resp = await fetch(config.apiUrl + "api/category", {
                     method: "POST",
