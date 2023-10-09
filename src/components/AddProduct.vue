@@ -14,7 +14,7 @@
         <input v-model="quantity" type="number" id="quantity">
         <br>
         <label for="image">Bild: </label>
-        <input v-on:change="image" type="file" id="image">
+        <input @change="imageSelected" type="file" id="image">
         <br>
         <label for="category">Produktkategori: </label>
         <select id="category" :value="selectedCategory" @input="updateSelectedCategory">
@@ -46,6 +46,8 @@ export default {
     },
     methods: {
         async getCategories() {
+
+            // Hämtar samtliga kategorier
             const resp = await fetch(config.apiUrl + "api/category", {
                 method: "GET",
                 headers: {
@@ -55,37 +57,58 @@ export default {
                 }
             });
             const data = await resp.json();
+
+            // Sätter värde för categories
             this.categories = data;
         },
+        // Sätter värde för image när en bildfil har valts
+        imageSelected(event) {
+            this.image = event.target.files[0];
+        },
+        // Sätter värde för salectedCategorie när en kategori har valts
         updateSelectedCategory(event) {
             this.selectedCategory = event.target.value;
         },
         async addProduct() {
+
+            // Om namn, antal och produktkategori har angivits
             if (this.name.trim() !== "" && this.quantity !== null && this.selectedCategory.trim() !== "") {
 
-                let productBody = {
-                    name: this.name,
-                    description: this.descript,
-                    price: this.price,
-                    quantity: this.quantity,
-                    image: this.image
+                // Skapar nytt FormData-objekt
+                const formData = new FormData();
+
+                // Adderar namn och antal till FormData-objektet
+                formData.append("name", this.name);
+                formData.append("quantity", this.quantity);
+
+                // Adderar beskrivning till FormData-objektet om descript inte är tom
+                if (this.descript !== "") {
+                    formData.append("description", this.descript);
                 }
+
+                // Adderar bildfil till FormData-objektet om image inte är null
+                if (this.image !== null) {
+                    formData.append("image", this.image);
+                }
+                
+                // Adderar pris till FormData-objektet om price inte är null
+                if (this.price !== null) {
+                    formData.append("price", this.price);
+                }
+                
+                // Gör fetch-anrop och skickar med FormData-objektet
                 const resp = await fetch(config.apiUrl + "api/product/" + this.selectedCategory, {
                     method: "POST",
                     headers: {
                         "Accept": "application/json",
-                        "Content-type": "application/json",
                         "Authorization": "Bearer " + this.token
                     },
-                    body: JSON.stringify(productBody)
+                    body: formData
                 });
-                const data = await resp.json();
 
-                // Skickar meddelande om respons är OK
+                // Om responsen är okej skickas meddelande och formuläret töms
                 if (resp.ok) {
                     this.message = "Produkten har lagts till!";
-
-                    // Tömmer inputfält och kategori
                     this.name = "";
                     this.descript = "";
                     this.price = null;
@@ -93,6 +116,7 @@ export default {
                     this.image = null;
                     this.selectedCategory = "";
                 }
+            // Skickar felmeddelande
             } else {
                 alert("Namn, antal och produktkategori måste anges!");
             }
