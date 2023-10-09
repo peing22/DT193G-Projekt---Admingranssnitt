@@ -31,6 +31,9 @@ import { useAuthStore } from '../stores/auth'
 import config from '../config'
 
 export default {
+    props: {
+        categories: Array
+    },
     data() {
         return {
             token: useAuthStore().$state.token,
@@ -39,28 +42,11 @@ export default {
             price: null,
             quantity: null,
             image: null,
-            categories: [],
             selectedCategory: "",
             message: ""
         }
     },
     methods: {
-        async getCategories() {
-
-            // Hämtar samtliga kategorier
-            const resp = await fetch(config.apiUrl + "api/category", {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json",
-                    "Content-type": "application/json",
-                    "Authorization": "Bearer " + this.token
-                }
-            });
-            const data = await resp.json();
-
-            // Sätter värde för categories
-            this.categories = data;
-        },
         // Sätter värde för image när en bildfil har valts
         imageSelected(event) {
             this.image = event.target.files[0];
@@ -121,9 +107,6 @@ export default {
                 alert("Namn, antal och produktkategori måste anges!");
             }
         }
-    },
-    mounted() {
-        this.getCategories();
     }
 }
 </script>
