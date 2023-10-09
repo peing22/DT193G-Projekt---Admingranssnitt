@@ -41,9 +41,10 @@ export default {
         AddProduct
     },
     methods: {
+        // Hämtar samtliga kategorier
         async getCategories() {
 
-            // Hämtar samtliga kategorier
+            // Gör fetch-anrop för att läsa ut samtliga kategorier
             const resp = await fetch(config.apiUrl + "api/category", {
                 method: "GET",
                 headers: {
