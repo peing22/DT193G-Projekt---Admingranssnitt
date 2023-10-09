@@ -3,7 +3,7 @@
     <h2 class="font-bold text-3xl">Produktkategorier</h2>
     <AddCategory />
     <h2 class="font-bold text-3xl">Produkter</h2>
-    <AddProduct :categories="categories" />
+    <AddProduct :categories="categories" :token="token" />
     <h2 class="font-bold text-3xl">Användarkonto</h2>
 </template>
 

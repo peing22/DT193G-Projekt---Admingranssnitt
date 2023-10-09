@@ -27,16 +27,15 @@
 </template>
 
 <script>
-import { useAuthStore } from '../stores/auth'
 import config from '../config'
 
 export default {
     props: {
-        categories: Array
+        categories: Array,
+        token: String
     },
     data() {
         return {
-            token: useAuthStore().$state.token,
             name: "",
             descript: "",
             price: null,
