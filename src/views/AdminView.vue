@@ -15,6 +15,15 @@
     <div>
         <h2 class="font-bold text-3xl">Produkter</h2>
         <AddProduct :categories="categories" :token="token" />
+        <SearchProduct :token="token" @searchedProductArray="searchedProductArray" />
+        <div v-if="showSearchedProduct">
+            <ShowProduct v-for="product in searchedProduct" :product="product" :key="product.id" @editProduct="editProduct"
+                @deleteProduct="deleteProduct" />
+        </div>
+        <div v-if="editingProduct">
+            <EditProduct :product="editingProduct" :categories="categories" @productEdited="updateProduct"
+                @cancelEdit="cancelEditProduct" />
+        </div>
     </div>
     <br>
     <h2 class="font-bold text-3xl">Användarkonton</h2>
@@ -27,20 +36,29 @@ import Categories from '../components/Categories.vue'
 import EditCategory from '../components/EditCategory.vue'
 import AddCategory from '../components/AddCategory.vue'
 import AddProduct from '../components/AddProduct.vue'
+import SearchProduct from '../components/SearchProduct.vue'
+import ShowProduct from '../components/ShowProduct.vue'
+import EditProduct from '../components/EditProduct.vue'
 
 export default {
     data() {
         return {
             token: useAuthStore().$state.token,
             categories: [],
-            editingCategory: null
+            editingCategory: null,
+            searchedProduct: [],
+            showSearchedProduct: false,
+            editingProduct: null
         }
     },
     components: {
         Categories,
         EditCategory,
         AddCategory,
-        AddProduct
+        AddProduct,
+        SearchProduct,
+        ShowProduct,
+        EditProduct
     },
     methods: {
         // Hämtar samtliga kategorier
@@ -110,6 +128,81 @@ export default {
             // Anropar metod för att hämta kategorier på nytt om respons är OK
             if (resp.ok) {
                 this.getCategories();
+            }
+        },
+        // Sätter värde för propertyn searchedProducts
+        searchedProductArray(product) {
+            this.searchedProduct = product;
+            this.showSearchedProduct = true;
+        },
+        // Öppnar upp möjlighet att ändra vald produkt
+        editProduct(product) {
+
+            // Sätter värde för propertyn editingProduct
+            this.editingProduct = product;
+
+            // Döljer framsökt(a) produkt(er)
+            this.showSearchedProduct = false;
+        },
+        // Avbryter ändring av vald produkt
+        cancelEditProduct() {
+
+            // Sätter null för propertyn editingProduct
+            this.editingProduct = null;
+        },
+        // Uppdaterar en vald produkt
+        async updateProduct(updatedProduct) {
+
+            // Om namn och antal har angivits
+            if (updatedProduct.name.trim() !== "" && updatedProduct.quantity !== "") {
+
+                // Skapar objekt
+                let toolBody = {
+                    category_id: updatedProduct.category_id,
+                    name: updatedProduct.name,
+                    description: updatedProduct.description,
+                    price: updatedProduct.price,
+                    quantity: updatedProduct.quantity
+                }
+
+                // Gör fetch-anrop för att uppdatera vald produkt
+                const resp = await fetch(config.apiUrl + 'api/product/' + updatedProduct.id, {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-type': 'application/json',
+                        'Authorization': 'Bearer ' + this.token,
+                    },
+                    body: JSON.stringify(toolBody),
+                });
+                const data = await resp.json();
+
+                // Sätter null för propertyn editingProduct om respons är OK
+                if (resp.ok) {
+                    this.editingProduct = null;
+                }
+            // Skickar felmeddelande
+            } else {
+                alert("Namn och antal måste anges!");
+            }
+        },
+        // Raderar en vald produkt
+        async deleteProduct(product) {
+
+            // Gör fetch-anrop för att radera vald produkt
+            const resp = await fetch(config.apiUrl + 'api/product/' + product.id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json',
+                    'Authorization': 'Bearer ' + this.token,
+                },
+            });
+            const data = await resp.json();
+
+            // Döljer framsökt(a) produkt(er) om respons är OK
+            if (resp.ok) {
+                this.showSearchedProduct = false;
             }
         }
     },

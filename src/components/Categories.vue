@@ -18,8 +18,8 @@ export default {
     },
     data() {
         return {
-            showConfirmation: false,
-        };
+            showConfirmation: false
+        }
     },
     methods: {
         // Visar meddelande och knappar

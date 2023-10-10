@@ -52,7 +52,7 @@ export default {
         imageSelected(event) {
             this.image = event.target.files[0];
         },
-        // Sätter värde för salectedCategorie när en kategori har valts
+        // Sätter värde för salectedCategory när en kategori har valts
         updateSelectedCategory(event) {
             this.selectedCategory = event.target.value;
         },
