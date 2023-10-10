@@ -4,6 +4,7 @@
         <h2 class="font-bold text-3xl">Produktkategorier</h2>
         <Categories v-for="category in categories" :category="category" :key="category.id" @editCategory="editCategory"
             @deleteCategory="deleteCategory" />
+        <p class="font-bold text-green-700" :class="{ 'fade-out': msgCategory !== '' }">{{ msgCategory }}</p>
         <div v-if="editingCategory">
             <EditCategory :category="editingCategory" @categoryEdited="updateCategory" @cancelEdit="cancelEditCategory" />
         </div>
@@ -23,6 +24,7 @@
         <div v-if="editingProduct">
             <EditProduct :product="editingProduct" :categories="categories" @productEdited="updateProduct"
                 @cancelEdit="cancelEditProduct" />
+            <p class="font-bold text-red-700">{{ errorMsgUpdateProduct }}</p>
         </div>
     </div>
     <br>
@@ -46,9 +48,11 @@ export default {
             token: useAuthStore().$state.token,
             categories: [],
             editingCategory: null,
+            msgCategory: "",
             searchedProduct: [],
             showSearchedProduct: false,
-            editingProduct: null
+            editingProduct: null,
+            errorMsgUpdateProduct: ""
         }
     },
     components: {
@@ -104,12 +108,18 @@ export default {
                 body: JSON.stringify({ name: updatedCategory.name }),
             });
 
-            // Anropar metor för att hämta kategorier på nytt om respons är OK
+            // Anropar metod för att hämta kategorier på nytt om respons är OK
             if (resp.ok) {
                 this.getCategories();
 
                 // Sätter null för propertyn editingCategory
                 this.editingCategory = null;
+
+                // Skickar meddelande
+                this.msgCategory = 'Kategorin "' + updatedCategory.name + '" har uppdaterats';
+
+                // Tar bort meddelande efter 5 sekunder
+                setTimeout(() => { this.msgCategory = "" }, 5000);
             }
         },
         // Raderar en vald kategori
@@ -128,6 +138,12 @@ export default {
             // Anropar metod för att hämta kategorier på nytt om respons är OK
             if (resp.ok) {
                 this.getCategories();
+
+                // Skickar meddelande
+                this.msgCategory = 'Kategorin "' + category.name + '" har raderats';
+
+                // Tar bort meddelande efter 5 sekunder
+                setTimeout(() => { this.msgUpdatedCategory = "" }, 5000);
             }
         },
         // Sätter värde för propertyn searchedProducts
@@ -181,9 +197,9 @@ export default {
                 if (resp.ok) {
                     this.editingProduct = null;
                 }
-            // Skickar felmeddelande
+                // Skickar felmeddelande
             } else {
-                alert("Namn och antal måste anges!");
+                this.errorMsgUpdateProduct = "Namn och antal måste anges!";
             }
         },
         // Raderar en vald produkt
@@ -212,3 +228,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.fade-out {
+    opacity: 0;
+    transition: opacity 2s 3s;
+}
+</style>

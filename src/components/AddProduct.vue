@@ -1,7 +1,7 @@
 <template>
     <p class="font-bold">Lägg till produkt</p>
     <form @submit.prevent="addProduct()">
-        <label for="name">Produktnamn: </label>
+        <label for="name">Namn: </label>
         <input v-model="name" type="text" id="name">
         <br>
         <label for="descript">Beskrivning: </label>
@@ -23,8 +23,8 @@
         <br>
         <input type="submit" value="Lägg till">
     </form>
-    <p class="font-bold text-green-700">{{ message }}</p>
-    <p class="font-bold text-red-700">{{ errorMessage }}</p>
+    <p class="font-bold text-green-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
+    <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
 </template>
 
 <script>
@@ -77,12 +77,12 @@ export default {
                 if (this.image !== null) {
                     formData.append("image", this.image);
                 }
-                
+
                 // Adderar pris till FormData-objektet om price inte är null
                 if (this.price !== null) {
                     formData.append("price", this.price);
                 }
-                
+
                 // Gör fetch-anrop och skickar med FormData-objektet
                 const resp = await fetch(config.apiUrl + "api/product/" + this.selectedCategory, {
                     method: "POST",
@@ -95,20 +95,32 @@ export default {
 
                 // Om responsen är okej skickas meddelande och formuläret töms
                 if (resp.ok) {
-                    this.message = "Produkten har lagts till!";
-                    this.errorMessage = "";
+                    this.message = 'Produkten "' + this.name + '" har lagts till';
                     this.name = "";
                     this.descript = "";
                     this.price = null;
                     this.quantity = null;
                     this.image = null;
                     this.selectedCategory = "";
+
+                    // Tar bort meddelande efter 5 sekunder
+                    setTimeout(() => { this.message = "" }, 5000);
                 }
             // Skickar felmeddelande
             } else {
                 this.errorMessage = "Namn, antal och produktkategori måste anges!";
+
+                // Tar bort meddelande efter 5 sekunder
+                setTimeout(() => { this.errorMessage = "" }, 5000);
             }
         }
     }
 }
 </script>
+
+<style scoped>
+.fade-out {
+    opacity: 0;
+    transition: opacity 2s 3s;
+}
+</style>

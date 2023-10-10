@@ -1,12 +1,14 @@
 <template>
+    <p class="font-bold text-green-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
     <p class="font-bold">Lägg till kategori</p>
     <form @submit.prevent="addCategory()">
         <label for="name">Namn: </label>
+        <br>
         <input v-model="name" type="text" id="name">
-        <p class="font-bold text-red-700">{{ errorMessage }}</p>
+        <br> 
         <input type="submit" value="Lägg till">
+        <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
     </form>
-    <p class="font-bold text-green-700">{{ message }}</p>
 </template>
 
 <script>
@@ -42,19 +44,32 @@ export default {
 
                 // Skickar meddelande om respons är OK
                 if (resp.ok) {
-                    this.message = "Kategorin har lagts till!";
+                    this.message = 'Kategorin "' + this.name + '" har lagts till';
 
                     // Skickar event med anrop och data till föräldrakomponent 
                     this.$emit("categoryAdded", data);
 
                     // Tömmer inputfält
                     this.name = "";
+
+                    // Tar bort meddelande efter 5 sekunder
+                    setTimeout(() => { this.message = "" }, 5000);
                 }
             // Skickar felmeddelande
             } else {
-                this.errorMessage = "Ett namn måste anges";
+                this.errorMessage = "Ett namn måste anges!";
+
+                // Tar bort meddelande efter 5 sekunder
+                setTimeout(() => { this.errorMessage = "" }, 5000);
             }
         }
     }
 }
 </script>
+
+<style scoped>
+.fade-out {
+    opacity: 0;
+    transition: opacity 2s 3s;
+}
+</style>
