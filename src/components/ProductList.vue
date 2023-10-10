@@ -40,7 +40,7 @@ export default {
         async updateQuantity(product) {
 
             // Gör fetch-anrop och skickar med uppdaterat värde för quantity
-            const resp = await fetch(config.apiUrl + "api/product/" + product.id, {
+            const resp = await fetch(config.apiUrl + "api/productquantity/" + product.id, {
                 method: "PUT",
                 headers: {
                     "Accept": "application/json",
