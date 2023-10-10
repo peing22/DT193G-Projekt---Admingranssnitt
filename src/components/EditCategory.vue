@@ -1,7 +1,9 @@
 <template>
     <div>
         <p class="font-bold">Ändra kategori</p>
-        <input v-model="editedCategoryName" type="text" />
+        <label for="name">Namn: </label>
+        <input v-model="editedCategoryName" type="text" id="name">
+        <br>
         <button @click="editCategory">Spara</button>
         <button @click="$emit('cancelEdit')">Avbryt</button>
     </div>

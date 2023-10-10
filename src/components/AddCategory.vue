@@ -1,7 +1,7 @@
 <template>
     <p class="font-bold">Lägg till kategori</p>
     <form @submit.prevent="addCategory()">
-        <label for="name">Namn på kategori: </label>
+        <label for="name">Namn: </label>
         <input v-model="name" type="text" id="name">
         <p class="font-bold text-red-700">{{ errorMessage }}</p>
         <input type="submit" value="Lägg till">
@@ -52,7 +52,7 @@ export default {
                 }
             // Skickar felmeddelande
             } else {
-                this.errorMessage = "Ange ett namn!";
+                this.errorMessage = "Ett namn måste anges";
             }
         }
     }
