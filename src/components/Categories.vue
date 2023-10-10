@@ -26,12 +26,12 @@ export default {
         confirmDelete() {
             this.showConfirmation = true;
         },
-        // Skickar event till föräldrakomponent för att radera kategorin om "Ja"
+        // Skickar event till föräldrakomponent för att radera vald kategori vid klick på Ja-knapp
         deleteCategory() {
             this.$emit('deleteCategory', this.category);
             this.showConfirmation = false;
         },
-        // Stänger meddelande och knappar om "Nej"
+        // Stänger meddelande och knappar vid klick på Nej-knapp
         cancelDelete() {
             this.showConfirmation = false;
         }

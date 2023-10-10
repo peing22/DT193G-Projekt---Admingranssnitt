@@ -44,7 +44,7 @@ export default {
                 if (resp.ok) {
                     this.message = "Kategorin har lagts till!";
 
-                    // Anropar metod
+                    // Skickar event med anrop och data till föräldrakomponent 
                     this.$emit("categoryAdded", data);
 
                     // Tömmer inputfält

@@ -12,8 +12,10 @@
         </div>
     </div>
     <br>
-    <h2 class="font-bold text-3xl">Produkter</h2>
-    <AddProduct :categories="categories" :token="token" />
+    <div>
+        <h2 class="font-bold text-3xl">Produkter</h2>
+        <AddProduct :categories="categories" :token="token" />
+    </div>
     <br>
     <h2 class="font-bold text-3xl">Användarkonton</h2>
 </template>
@@ -55,15 +57,19 @@ export default {
             });
             const data = await resp.json();
 
-            // Sätter värde för categories
+            // Sätter värde för propertyn categories
             this.categories = data;
         },
         // Öppnar upp möjlighet att ändra vald kategori
         editCategory(category) {
+
+            // Sätter värde för propertyn editingCategory
             this.editingCategory = category;
         },
-        // Avbryter ändring av kategori
+        // Avbryter ändring av vald kategori
         cancelEditCategory() {
+
+            // Sätter null för propertyn editingCategory
             this.editingCategory = null;
         },
         // Uppdaterar en vald kategori
@@ -84,11 +90,11 @@ export default {
             if (resp.ok) {
                 this.getCategories();
 
-                // Sätter editingCategory till null
+                // Sätter null för propertyn editingCategory
                 this.editingCategory = null;
             }
         },
-        // Raderar vald kategori
+        // Raderar en vald kategori
         async deleteCategory(category) {
 
             // Gör fetch-anrop för att radera vald kategori
@@ -101,7 +107,7 @@ export default {
                 },
             });
 
-            // Anropar metor för att hämta kategorier på nytt om respons är OK
+            // Anropar metod för att hämta kategorier på nytt om respons är OK
             if (resp.ok) {
                 this.getCategories();
             }

@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         editCategory() {
-            // Skickar event med uppdaterat kategorinamn till föräldrakomponent
+            // Skickar event med kategori-id och kategori-namn till föräldrakomponent
             this.$emit('categoryEdited', {
                 id: this.category.id,
                 name: this.editedCategoryName,
