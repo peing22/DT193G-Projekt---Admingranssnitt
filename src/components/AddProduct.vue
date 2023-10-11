@@ -1,6 +1,6 @@
 <template>
     <h3 class="font-bold">Lägg till produkt</h3>
-    <form @submit.prevent="addProduct()">
+    <form ref="productForm" @submit.prevent="addProduct()">
         <label for="productName">Namn: </label>
         <input v-model="name" type="text" id="productName">
         <br>
@@ -16,7 +16,7 @@
         <label for="image">Bild: </label>
         <input @change="imageSelected" type="file" id="image">
         <br>
-        <label for="category">Produktkategori: </label>
+        <label for="category">Kategori: </label>
         <select id="category" :value="selectedCategory" @input="updateSelectedCategory">
             <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
         </select>
@@ -93,9 +93,14 @@ export default {
                     body: formData
                 });
 
-                // Om responsen är okej skickas meddelande och formuläret töms
+                // Om responsen är OK
                 if (resp.ok) {
+
+                    // Skickar meddelande
                     this.message = 'Produkten "' + this.name + '" har lagts till';
+
+                    // Tömmer och återställer formulär
+                    this.$refs.productForm.reset();
                     this.name = "";
                     this.descript = "";
                     this.price = null;
@@ -108,7 +113,7 @@ export default {
                 }
             // Skickar felmeddelande
             } else {
-                this.errorMessage = "Namn, antal och produktkategori måste anges!";
+                this.errorMessage = "Namn, antal och kategori måste anges!";
 
                 // Tar bort meddelande efter 5 sekunder
                 setTimeout(() => { this.errorMessage = "" }, 5000);
