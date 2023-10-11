@@ -33,7 +33,8 @@
         </div>
     </div>
     <br>
-    <h2 class="font-bold text-3xl">Användarkonton</h2>
+    <h2 class="font-bold text-3xl">Användare</h2>
+    <AddUser :token="token" />
 </template>
 
 <script>
@@ -42,10 +43,11 @@ import config from '../config'
 import Categories from '../components/Categories.vue'
 import EditCategory from '../components/EditCategory.vue'
 import AddCategory from '../components/AddCategory.vue'
-import AddProduct from '../components/AddProduct.vue'
 import SearchProduct from '../components/SearchProduct.vue'
 import ShowProduct from '../components/ShowProduct.vue'
 import EditProduct from '../components/EditProduct.vue'
+import AddProduct from '../components/AddProduct.vue'
+import AddUser from '../components/AddUser.vue'
 
 export default {
     data() {
@@ -65,10 +67,11 @@ export default {
         Categories,
         EditCategory,
         AddCategory,
-        AddProduct,
         SearchProduct,
         ShowProduct,
-        EditProduct
+        EditProduct,
+        AddProduct,
+        AddUser
     },
     methods: {
         // Hämtar samtliga kategorier

@@ -1,8 +1,8 @@
 <template>
     <h3 class="font-bold">Lägg till produkt</h3>
     <form @submit.prevent="addProduct()">
-        <label for="name">Namn: </label>
-        <input v-model="name" type="text" id="name">
+        <label for="productName">Namn: </label>
+        <input v-model="name" type="text" id="productName">
         <br>
         <label for="descript">Beskrivning: </label>
         <input v-model="descript" type="text" id="descript">

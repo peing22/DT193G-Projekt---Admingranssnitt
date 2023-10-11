@@ -1,8 +1,8 @@
 <template>
     <div>
         <h3 class="font-bold">Ändra Produkt</h3>
-        <label for="name">Namn: </label>
-        <input v-model="editedProductName" type="text" id="name">
+        <label for="editProductName">Namn: </label>
+        <input v-model="editedProductName" type="text" id="editProductName">
         <br>
         <label for="descript">Beskrivning: </label>
         <input v-model="editedProductDesctipt" type="text" id="descript">

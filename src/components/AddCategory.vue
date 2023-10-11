@@ -2,8 +2,8 @@
     <p class="font-bold text-green-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
     <h3 class="font-bold">Lägg till kategori</h3>
     <form @submit.prevent="addCategory()">
-        <label for="name">Namn: </label>
-        <input v-model="name" type="text" id="name">
+        <label for="catName">Namn: </label>
+        <input v-model="name" type="text" id="catName">
         <input type="submit" value="Lägg till">
     </form>
     <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
