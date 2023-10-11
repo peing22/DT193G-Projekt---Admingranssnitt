@@ -13,6 +13,14 @@
         <label for="quantity">Antal: </label>
         <input v-model="editedProductQuantity" type="number" id="quantity">
         <br>
+        <div v-if="product.image !== null">
+            <p>Nuvarande bild: </p>
+            <img :src="getProductImageUrl(product.image)" :alt="product.name" width="25" height="auto">
+        </div>
+        <label for="image" v-if="product.image !== null">Ny bild: </label>
+        <label for="image" v-else>Bild: </label>
+        <input @change="imageSelected" type="file" id="image">
+        <br>
         <label for="category">Produktkategori: </label>
         <select id="category" :value="editedProductCategory" @input="updateSelectedCategory">
             <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
@@ -24,6 +32,8 @@
 </template>
   
 <script>
+import config from '../config'
+
 export default {
     props: {
         product: Object,
@@ -35,12 +45,29 @@ export default {
             editedProductDesctipt: this.product.description,
             editedProductPrice: this.product.price,
             editedProductQuantity: this.product.quantity,
+            editedProductImage: null,
             editedProductCategory: this.product.category_id,
             selectedCategory: null,
             catId: null
         }
     },
     methods: {
+        // Hämtar sökväg till bildfil
+        getProductImageUrl(imagePath) {
+
+            // Returnerar sökvägen till bilden om imagePath inte är null
+            if (imagePath !== null) {
+                return config.apiUrl + imagePath;
+
+                // Returnerar en standardbild
+            } else {
+                return config.apiUrl + "uploads/default.jpg";
+            }
+        },
+        // Sätter värde för image när en bildfil har valts
+        imageSelected(event) {
+            this.editedProductImage = event.target.files[0];
+        },
         // Sätter värde för salectedCategory om en annan kategori har valts
         updateSelectedCategory(event) {
             this.selectedCategory = event.target.value;
@@ -61,7 +88,8 @@ export default {
                 name: this.editedProductName,
                 description: this.editedProductDesctipt,
                 price: this.editedProductPrice,
-                quantity: this.editedProductQuantity
+                quantity: this.editedProductQuantity,
+                image: this.editedProductImage
             });
         }
     }

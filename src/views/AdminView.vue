@@ -172,32 +172,68 @@ export default {
             // Om namn och antal har angivits
             if (updatedProduct.name.trim() !== "" && updatedProduct.quantity !== "") {
 
-                // Skapar objekt
-                let toolBody = {
-                    category_id: updatedProduct.category_id,
-                    name: updatedProduct.name,
-                    description: updatedProduct.description,
-                    price: updatedProduct.price,
-                    quantity: updatedProduct.quantity
+                // Skapar nytt FormData-objekt
+                const formData = new FormData();
+
+                // Adderar kategori-id, namn och antal till FormData-objektet
+                formData.append("category_id", updatedProduct.category_id)
+                formData.append("name", updatedProduct.name);
+                formData.append("quantity", updatedProduct.quantity);
+
+                // Adderar beskrivning till FormData-objektet om descript inte är tom
+                if (updatedProduct.description !== "") {
+                    formData.append("description", updatedProduct.description);
                 }
 
-                // Gör fetch-anrop för att uppdatera vald produkt
-                const resp = await fetch(config.apiUrl + 'api/product/' + updatedProduct.id, {
-                    method: 'PUT',
+                // Adderar bildfil till FormData-objektet om image inte är null
+                if (updatedProduct.image !== null) {
+                    formData.append("image", updatedProduct.image);
+                }
+
+                // Adderar pris till FormData-objektet om price inte är null
+                if (updatedProduct.price !== null) {
+                    formData.append("price", updatedProduct.price);
+                }
+
+                // Adderar method spoofing eftersom formulärdata inte accepteras vid PUT-request
+                formData.append("_method", "PUT");
+
+                // Gör fetch-anrop och skickar med FormData-objektet
+                const resp = await fetch(config.apiUrl + "api/product/" + updatedProduct.id, {
+                    method: "POST",
                     headers: {
-                        'Accept': 'application/json',
-                        'Content-type': 'application/json',
-                        'Authorization': 'Bearer ' + this.token,
+                        "Accept": "application/json",
+                        "Authorization": "Bearer " + this.token
                     },
-                    body: JSON.stringify(toolBody),
+                    body: formData
                 });
+
+                // // Skapar objekt
+                // let toolBody = {
+                //     category_id: updatedProduct.category_id,
+                //     name: updatedProduct.name,
+                //     description: updatedProduct.description,
+                //     price: updatedProduct.price,
+                //     quantity: updatedProduct.quantity
+                // }
+
+                // // Gör fetch-anrop för att uppdatera vald produkt
+                // const resp = await fetch(config.apiUrl + 'api/product/' + updatedProduct.id, {
+                //     method: 'PUT',
+                //     headers: {
+                //         'Accept': 'application/json',
+                //         'Content-type': 'application/json',
+                //         'Authorization': 'Bearer ' + this.token,
+                //     },
+                //     body: JSON.stringify(toolBody),
+                // });
                 const data = await resp.json();
 
                 // Sätter null för propertyn editingProduct om respons är OK
                 if (resp.ok) {
                     this.editingProduct = null;
                 }
-                // Skickar felmeddelande
+            // Skickar felmeddelande
             } else {
                 this.errorMsgUpdateProduct = "Namn och antal måste anges!";
             }
