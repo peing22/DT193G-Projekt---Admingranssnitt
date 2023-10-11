@@ -1,11 +1,11 @@
 <template>
     <div v-for="product in products" :key="product.id">
-        <img :src="getProductImageUrl(product.image)" :alt="product.name">
-        <p class="font-bold">{{ product.name }}</p>
+        <h2 class="font-bold text-xl">{{ product.name }}</h2>
         <p v-if="product.description !== null">{{ product.description }}</p>
         <p v-if="product.price !== null">Pris: {{ product.price }} kr</p>
         <label for="quantity">Antal: </label>
         <input type="number" id="quantity" v-model="product.quantity" @change="updateQuantity(product)">
+        <img :src="getProductImageUrl(product.image)" :alt="product.name">
         <br>
     </div>
 </template>
