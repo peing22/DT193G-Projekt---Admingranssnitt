@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p class="font-bold">Ändra kategori</p>
+        <h3 class="font-bold">Ändra kategori</h3>
         <label for="name">Namn: </label>
         <input v-model="editedCategoryName" type="text" id="name">
         <button @click="editCategory">Spara</button>

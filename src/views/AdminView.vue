@@ -2,6 +2,7 @@
     <h1 class="font-bold">Administrera</h1>
     <div>
         <h2 class="font-bold text-3xl">Kategorier</h2>
+        <h3 class="font-bold">Befintliga kategorier</h3>
         <Categories v-for="category in categories" :category="category" :key="category.id" @editCategory="editCategory"
             @deleteCategory="deleteCategory" />
         <p class="font-bold text-green-700" :class="{ 'fade-out': msgCategory !== '' }">{{ msgCategory }}</p>
@@ -17,7 +18,7 @@
         <h2 class="font-bold text-3xl">Produkter</h2>
         <SearchProduct :token="token" @searchedProductArray="searchedProductArray" />
         <div v-if="showSearchedProduct">
-            <p class="font-bold">Sökresultat</p>
+            <h3 class="font-bold">Sökresultat</h3>
             <ShowProduct v-for="product in searchedProduct" :product="product" :key="product.id" @editProduct="editProduct"
                 @deleteProduct="deleteProduct" />
         </div>

@@ -1,5 +1,5 @@
 <template>
-    <p class="font-bold">Lägg till produkt</p>
+    <h3 class="font-bold">Lägg till produkt</h3>
     <form @submit.prevent="addProduct()">
         <label for="name">Namn: </label>
         <input v-model="name" type="text" id="name">

@@ -1,6 +1,6 @@
 <template>
     <p class="font-bold text-green-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
-    <p class="font-bold">Lägg till kategori</p>
+    <h3 class="font-bold">Lägg till kategori</h3>
     <form @submit.prevent="addCategory()">
         <label for="name">Namn: </label>
         <input v-model="name" type="text" id="name">
