@@ -1,5 +1,5 @@
 <template>
-    <h3 class="font-bold">Lägg till användare</h3>
+    <h3>Lägg till användare</h3>
     <form @submit.prevent="addUser()">
         <label for="userName">Namn: </label>
         <input v-model="name" type="text" id="userName" placeholder="Förnamn Efternamn">

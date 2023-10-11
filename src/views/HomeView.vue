@@ -1,5 +1,5 @@
 <template>
-  <h1 class="font-bold">Logga in</h1>
+  <h1>Logga in</h1>
   <form @submit.prevent="loginUser()">
     <label for="email">E-post:</label>
     <input v-model="email" type="text" id="email" name="email" class="form-control">

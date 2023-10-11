@@ -1,8 +1,8 @@
 <template>
-    <h1 class="font-bold">Administrera</h1>
+    <h1>Administrera</h1>
     <div>
-        <h2 class="font-bold text-3xl">Kategorier</h2>
-        <h3 class="font-bold">Befintliga kategorier</h3>
+        <h2>Kategorier</h2>
+        <h3>Befintliga kategorier</h3>
         <Categories v-for="category in categories" :category="category" :key="category.id" @editCategory="editCategory"
             @deleteCategory="deleteCategory" />
         <p class="font-bold text-green-700" :class="{ 'fade-out': msgCategory !== '' }">{{ msgCategory }}</p>
@@ -15,10 +15,10 @@
     </div>
     <br>
     <div>
-        <h2 class="font-bold text-3xl">Produkter</h2>
+        <h2>Produkter</h2>
         <SearchProduct :token="token" @searchedProductArray="searchedProductArray" />
         <div v-if="showSearchedProduct">
-            <h3 class="font-bold">Sökresultat</h3>
+            <h3>Sökresultat</h3>
             <ShowProduct v-for="product in searchedProduct" :product="product" :key="product.id" @editProduct="editProduct"
                 @deleteProduct="deleteProduct" />
         </div>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <br>
-    <h2 class="font-bold text-3xl">Användare</h2>
+    <h2>Användare</h2>
     <AddUser :token="token" />
 </template>
 

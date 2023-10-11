@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="font-bold">Ändra Produkt</h3>
+        <h3>Ändra Produkt</h3>
         <label for="editProductName">Namn: </label>
         <input v-model="editedProductName" type="text" id="editProductName">
         <br>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="font-bold">Produkter</h1>
+    <h1>Produkter</h1>
     <CategorySelector :categories="categories" :selectedCategory="selectedCategory"
       @update:selectedCategory="updateSelectedCategory" />
     <ProductList :products="showProducts" />

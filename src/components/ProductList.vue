@@ -1,6 +1,6 @@
 <template>
     <div v-for="product in products" :key="product.id">
-        <h2 class="font-bold text-xl">{{ product.name }}</h2>
+        <h2>{{ product.name }}</h2>
         <p v-if="product.description !== null">{{ product.description }}</p>
         <p v-if="product.price !== null">Pris: {{ product.price }} kr</p>
         <label for="quantity">Antal: </label>

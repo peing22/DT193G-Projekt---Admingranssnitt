@@ -1,6 +1,6 @@
 <template>
     <p class="font-bold text-green-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
-    <h3 class="font-bold">Lägg till produkt</h3>
+    <h3>Lägg till produkt</h3>
     <form ref="productForm" @submit.prevent="addProduct()">
         <label for="productName">Namn: </label>
         <input v-model="name" type="text" id="productName">

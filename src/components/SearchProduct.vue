@@ -1,5 +1,5 @@
 <template>
-    <h3 class="font-bold">Sök fram produkt</h3>
+    <h3>Sök produkt</h3>
     <form @submit.prevent="searchProduct()">
         <label for="search">Namn: </label>
         <input type="text" v-model="searchInput" id="search">
