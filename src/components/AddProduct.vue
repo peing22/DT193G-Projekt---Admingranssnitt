@@ -1,4 +1,5 @@
 <template>
+    <p class="font-bold text-green-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
     <h3 class="font-bold">Lägg till produkt</h3>
     <form ref="productForm" @submit.prevent="addProduct()">
         <label for="productName">Namn: </label>
@@ -23,7 +24,6 @@
         <br>
         <input type="submit" value="Lägg till">
     </form>
-    <p class="font-bold text-green-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
     <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
 </template>
 
