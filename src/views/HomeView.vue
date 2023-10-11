@@ -9,7 +9,7 @@
     <br>
     <input type="submit" value="Logga in">
   </form>
-  <p class="font-bold text-red-700">{{ message }}</p>
+  <p class="font-bold text-red-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
 </template>
 
 <script>
@@ -50,7 +50,10 @@ export default {
       if (data.message === 'Validation error' || data.message === 'Wrong email and/or password') {
 
         // Skickar felmeddelande
-        this.message = "Du har angett felaktiga uppgifter";
+        this.message = "Du har angett felaktiga uppgifter!";
+
+        // Tar bort meddelande efter 5 sekunder
+        setTimeout(() => { this.message = "" }, 5000);
 
       // Skickar token och name från respons till auth i stores
       } else {
@@ -66,3 +69,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.fade-out {
+  opacity: 0;
+  transition: opacity 2s 3s;
+}
+</style>
