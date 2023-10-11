@@ -1,7 +1,7 @@
 <template>
     <h1 class="font-bold">Administrera</h1>
     <div>
-        <h2 class="font-bold text-3xl">Produktkategorier</h2>
+        <h2 class="font-bold text-3xl">Kategorier</h2>
         <Categories v-for="category in categories" :category="category" :key="category.id" @editCategory="editCategory"
             @deleteCategory="deleteCategory" />
         <p class="font-bold text-green-700" :class="{ 'fade-out': msgCategory !== '' }">{{ msgCategory }}</p>
@@ -15,16 +15,20 @@
     <br>
     <div>
         <h2 class="font-bold text-3xl">Produkter</h2>
-        <AddProduct :categories="categories" :token="token" />
         <SearchProduct :token="token" @searchedProductArray="searchedProductArray" />
         <div v-if="showSearchedProduct">
+            <p class="font-bold">Sökresultat</p>
             <ShowProduct v-for="product in searchedProduct" :product="product" :key="product.id" @editProduct="editProduct"
                 @deleteProduct="deleteProduct" />
         </div>
+        <p class="font-bold text-green-700" :class="{ 'fade-out': msgProduct !== '' }">{{ msgProduct }}</p>
         <div v-if="editingProduct">
             <EditProduct :product="editingProduct" :categories="categories" @productEdited="updateProduct"
                 @cancelEdit="cancelEditProduct" />
-            <p class="font-bold text-red-700">{{ errorMsgUpdateProduct }}</p>
+            <p class="font-bold text-red-700" :class="{ 'fade-out': errorMsgProduct !== '' }">{{ errorMsgProduct }}</p>
+        </div>
+        <div v-else>
+            <AddProduct :categories="categories" :token="token" />
         </div>
     </div>
     <br>
@@ -52,7 +56,8 @@ export default {
             searchedProduct: [],
             showSearchedProduct: false,
             editingProduct: null,
-            errorMsgUpdateProduct: ""
+            msgProduct: "",
+            errorMsgProduct: ""
         }
     },
     components: {
@@ -143,7 +148,7 @@ export default {
                 this.msgCategory = 'Kategorin "' + category.name + '" har raderats';
 
                 // Tar bort meddelande efter 5 sekunder
-                setTimeout(() => { this.msgUpdatedCategory = "" }, 5000);
+                setTimeout(() => { this.msgCategory = "" }, 5000);
             }
         },
         // Sätter värde för propertyn searchedProducts
@@ -156,9 +161,6 @@ export default {
 
             // Sätter värde för propertyn editingProduct
             this.editingProduct = product;
-
-            // Döljer framsökt(a) produkt(er)
-            this.showSearchedProduct = false;
         },
         // Avbryter ändring av vald produkt
         cancelEditProduct() {
@@ -207,35 +209,29 @@ export default {
                     },
                     body: formData
                 });
-
-                // // Skapar objekt
-                // let toolBody = {
-                //     category_id: updatedProduct.category_id,
-                //     name: updatedProduct.name,
-                //     description: updatedProduct.description,
-                //     price: updatedProduct.price,
-                //     quantity: updatedProduct.quantity
-                // }
-
-                // // Gör fetch-anrop för att uppdatera vald produkt
-                // const resp = await fetch(config.apiUrl + 'api/product/' + updatedProduct.id, {
-                //     method: 'PUT',
-                //     headers: {
-                //         'Accept': 'application/json',
-                //         'Content-type': 'application/json',
-                //         'Authorization': 'Bearer ' + this.token,
-                //     },
-                //     body: JSON.stringify(toolBody),
-                // });
                 const data = await resp.json();
 
-                // Sätter null för propertyn editingProduct om respons är OK
+                // Om respons är OK
                 if (resp.ok) {
+
+                    // Sätter null för propertyn editingProduct
                     this.editingProduct = null;
+
+                    // Döljer framsökt(a) produkt(er)
+                    this.showSearchedProduct = false;
+
+                    // Skickar meddelande
+                    this.msgProduct = 'Produkten "' + updatedProduct.name + '" har uppdaterats'
+
+                    // Tar bort meddelande efter 5 sekunder
+                    setTimeout(() => { this.msgProduct = "" }, 5000);
                 }
             // Skickar felmeddelande
             } else {
-                this.errorMsgUpdateProduct = "Namn och antal måste anges!";
+                this.errorMsgProduct = "Namn och antal måste anges!";
+
+                // Tar bort meddelande efter 5 sekunder
+                setTimeout(() => { this.errorMsgProduct = "" }, 5000);
             }
         },
         // Raderar en vald produkt
@@ -252,9 +248,17 @@ export default {
             });
             const data = await resp.json();
 
-            // Döljer framsökt(a) produkt(er) om respons är OK
+            // Om respons är OK
             if (resp.ok) {
+
+                // Döljer framsökt(a) produkt(er)
                 this.showSearchedProduct = false;
+
+                // Skickar meddelande
+                this.msgProduct = 'Produkten "' + product.name + '" har raderats'
+
+                // Tar bort meddelande efter 5 sekunder
+                setTimeout(() => { this.msgProduct = "" }, 5000);
             }
         }
     },

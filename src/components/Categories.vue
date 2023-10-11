@@ -4,7 +4,7 @@
         <button @click="$emit('editCategory', category)">Ändra</button>
         <button @click="confirmDelete">Radera</button>
         <div v-if="showConfirmation">
-            <p>Alla produkter som tillhör denna kategori kommer att försvinna. Vill du verkligen radera produktkategorin?</p>
+            <p>Alla produkter som tillhör denna kategori kommer att försvinna. Vill du verkligen radera kategorin?</p>
             <button @click="deleteCategory">Ja</button>
             <button @click="cancelDelete">Nej</button>
         </div>

@@ -1,10 +1,11 @@
 <template>
-    <p class="font-bold">Sök produkt</p>
+    <p class="font-bold">Sök fram produkt</p>
     <form @submit.prevent="searchProduct()">
-        <label for="search">Ange produktnamn: </label>
+        <label for="search">Namn: </label>
         <input type="text" v-model="searchInput" id="search">
         <input type="submit" value="Sök">
-        <p class="font-bold text-red-700">{{ errorMessage }}</p>
+        <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
+        <p class="font-bold text-orange-500" :class="{ 'fade-out': warningMessage !== '' }">{{ warningMessage }}</p>
     </form>
 </template>
 
@@ -18,6 +19,7 @@ export default {
     data() {
         return {
             searchInput: "",
+            warningMessage: "",
             errorMessage: ""
         }
     },
@@ -40,18 +42,40 @@ export default {
                 // Om respons är OK
                 if (resp.ok) {
 
-                    // Skickar event med anrop och data till föräldrakomponent 
-                    this.$emit('searchedProductArray', data);
+                    // Om data är en tom array
+                    if (data.length === 0) {
 
-                    // Tömmer element
-                    this.searchInput = "";
-                    this.errorMessage = "";
+                        // Skickar meddelande
+                        this.warningMessage = 'Det finns ingen produkt med namnet "' + this.searchInput + '"';
+
+                        // Tar bort meddelande efter 5 sekunder
+                        setTimeout(() => { this.warningMessage = "" }, 5000);
+
+                    } else {
+                        // Skickar event med anrop och data till föräldrakomponent 
+                        this.$emit('searchedProductArray', data);
+
+                        // Tömmer element
+                        this.searchInput = "";
+                        this.warningMessage = "";
+                        this.errorMessage = "";
+                    }
                 }
             // Skickar felmeddelande
             } else {
-                this.errorMessage = "Ett namn måste anges";
+                this.errorMessage = "Namn måste anges!";
+
+                // Tar bort meddelande efter 5 sekunder
+                setTimeout(() => { this.errorMessage = "" }, 5000);
             }
         }
     }
 }
 </script>
+
+<style scoped>
+.fade-out {
+    opacity: 0;
+    transition: opacity 2s 3s;
+}
+</style>

@@ -2,9 +2,7 @@
     <div>
         <p class="font-bold">Ändra kategori</p>
         <label for="name">Namn: </label>
-        <br>
         <input v-model="editedCategoryName" type="text" id="name">
-        <br>
         <button @click="editCategory">Spara</button>
         <button @click="$emit('cancelEdit')">Avbryt</button>
         <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>

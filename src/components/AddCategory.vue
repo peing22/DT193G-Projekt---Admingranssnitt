@@ -3,12 +3,10 @@
     <p class="font-bold">Lägg till kategori</p>
     <form @submit.prevent="addCategory()">
         <label for="name">Namn: </label>
-        <br>
         <input v-model="name" type="text" id="name">
-        <br> 
         <input type="submit" value="Lägg till">
-        <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
     </form>
+    <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
 </template>
 
 <script>
@@ -57,7 +55,7 @@ export default {
                 }
             // Skickar felmeddelande
             } else {
-                this.errorMessage = "Ett namn måste anges!";
+                this.errorMessage = "Namn måste anges!";
 
                 // Tar bort meddelande efter 5 sekunder
                 setTimeout(() => { this.errorMessage = "" }, 5000);
