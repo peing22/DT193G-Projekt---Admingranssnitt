@@ -20,7 +20,8 @@
         <label for="image" v-if="product.image !== null">Ny bild: </label>
         <label for="image" v-else>Bild: </label>
         <input @change="imageSelected" type="file" id="image">
-        <br>
+        <p v-if="imageMessage" class="font-bold text-red-700">{{ imageMessage }}</p>
+        <br v-else>
         <label for="category">Produktkategori: </label>
         <select id="category" :value="editedProductCategory" @input="updateSelectedCategory">
             <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
@@ -46,6 +47,7 @@ export default {
             editedProductPrice: this.product.price,
             editedProductQuantity: this.product.quantity,
             editedProductImage: null,
+            imageMessage: "",
             editedProductCategory: this.product.category_id,
             selectedCategory: null,
             catId: null
@@ -59,14 +61,42 @@ export default {
             if (imagePath !== null) {
                 return config.apiUrl + imagePath;
 
-                // Returnerar en standardbild
+            // Returnerar en standardbild
             } else {
                 return config.apiUrl + "uploads/default.jpg";
             }
         },
-        // Sätter värde för image när en bildfil har valts
+        // När en förändring har skett i inputfältet för bildfil
         imageSelected(event) {
-            this.editedProductImage = event.target.files[0];
+
+            // Lagrar eventuell fil i en variabel
+            const selectedFile = event.target.files[0];
+
+            // Tar bort felmeddelande om det inte existerar någon fil men ett felmeddelande är synligt 
+            if (!selectedFile && this.imageMessage !== "") {
+                this.imageMessage = "";
+            }
+
+            // Lagrar tillåtna filtyper och maxstorlek i variabler
+            const allowedExtensions = ['jpeg', 'jpg', 'png', 'gif'];
+            const maxFileSize = 2048;
+
+            // Lagrar filtyp konverterad till små bokstäver i en variabel
+            const fileExtension = selectedFile.name.split('.').pop().toLowerCase();
+
+            // Skriver ut felmeddelande om filtypen inte stämmer överens med tillåtna filtyper
+            if (!allowedExtensions.includes(fileExtension)) {
+                this.imageMessage = "Filer av andra typer än JPEG, JPG, PNG, och GIF kommer inte laddas upp!";
+
+            // Skriver ut felmeddelande om filen är större än 2MB
+            } else if (selectedFile.size > maxFileSize * 1024) {
+                this.imageMessage = "Filer större än 2MB kommer inte laddas upp!";
+
+            // Sätter värde för propertyn image och tömmer eventuellt felmeddelande
+            } else {
+                this.editedProductImage = selectedFile;
+                this.imageMessage = "";
+            }
         },
         // Sätter värde för salectedCategory om en annan kategori har valts
         updateSelectedCategory(event) {
