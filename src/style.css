@@ -4,19 +4,37 @@
 
 @layer base {
     h1 {
-        @apply text-4xl font-bold;
+        @apply text-2xl md:text-4xl font-medium uppercase tracking-widest;
     }
 
     h2 {
-        @apply text-2xl font-bold;
+        @apply text-xl md:text-2xl font-medium uppercase tracking-widest;
     }
 
     h3 {
-        @apply text-lg font-semibold;
+        @apply text-base md:text-lg font-medium uppercase tracking-wider;
+    }
+
+    p,
+    label {
+        @apply text-xs md:text-base;
+    }
+
+    button,
+    input[type="submit"] {
+        @apply cursor-pointer text-xs md:text-base bg-white/20 transition duration-300 ease-in-out hover:bg-white/40 py-1 px-3 md:px-4 uppercase border-solid border-y border-white/20 font-medium tracking-widest rounded-full;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    input[type="password"] {
+        @apply text-black rounded-sm;
     }
 }
 
 body {
+    background-color: black;
     background-image: url('/src/assets/leafs.jpg');
     background-size: cover;
     background-position: center;

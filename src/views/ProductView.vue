@@ -1,8 +1,8 @@
 <template>
+  <h1>Produkter</h1>
+  <CategorySelector :categories="categories" :selectedCategory="selectedCategory"
+    @update:selectedCategory="updateSelectedCategory" />
   <div>
-    <h1>Produkter</h1>
-    <CategorySelector :categories="categories" :selectedCategory="selectedCategory"
-      @update:selectedCategory="updateSelectedCategory" />
     <ProductList :products="showProducts" />
   </div>
 </template>
@@ -43,7 +43,7 @@ export default {
       // Returnerar samtliga produkter om selectedCategory är tom
       if (this.selectedCategory === "") {
         return this.products;
-      
+
       // Returnerar produkter för vald kategori
       } else {
         return this.selectedProducts;
@@ -57,7 +57,7 @@ export default {
       // Gör två parallella fetch-anrop
       const [categoriesResp, productsResp] = await Promise.all([
 
-      // Hämtar kategorier
+        // Hämtar kategorier
         fetch(config.apiUrl + "api/category", {
           method: "GET",
           headers: {
@@ -88,7 +88,7 @@ export default {
     },
     // Uppdaterar vald kategori
     updateSelectedCategory(category) {
-      
+
       // Uppdaterar selectedCategory med id för vald kategori
       this.selectedCategory = category;
 
