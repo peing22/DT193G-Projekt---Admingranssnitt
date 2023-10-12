@@ -3,7 +3,7 @@
         <div class="flex items-center justify-end p-2 text-xs md:text-base">
             <p class="mx-2">{{ message }}</p>
             <button @click="logoutUser()"
-                class="bg-white/20 transition duration-300 ease-in-out hover:bg-white/40 py-1 px-2 md:px-4 uppercase border-solid border-y border-white/20 font-medium tracking-widest rounded-full">Logga ut<i class="fa-solid fa-right-from-bracket ps-1"></i></button>
+                class="bg-white/20 transition duration-300 ease-in-out hover:bg-white/40 py-1 px-2 md:px-4 uppercase border-solid border-y border-white/20 font-medium tracking-widest rounded-full">Logga ut<i class="fa-solid fa-right-from-bracket ps-1 md:ps-2"></i></button>
         </div>
         <nav
             class="bg-white/20 flex items-center justify-center py-3 md:py-7 mx-auto uppercase tracking-widest text-xs md:text-xl">
