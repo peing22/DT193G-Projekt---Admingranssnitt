@@ -1,6 +1,8 @@
 <template>
   <Header v-if="showHeader" />
-  <RouterView />
+  <main class="container mx-auto my-9 md:my-12">
+    <RouterView />
+  </main>
 </template>
 
 <script>
