@@ -6,10 +6,21 @@
     h1 {
         @apply text-4xl font-bold;
     }
+
     h2 {
         @apply text-2xl font-bold;
     }
+
     h3 {
         @apply text-lg font-semibold;
     }
+}
+
+body {
+    background-image: url('/src/assets/leafs.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
 }
