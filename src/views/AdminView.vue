@@ -186,8 +186,8 @@ export default {
                 formData.append("name", updatedProduct.name);
                 formData.append("quantity", updatedProduct.quantity);
 
-                // Adderar beskrivning till FormData-objektet om descript inte är tom
-                if (updatedProduct.description !== "") {
+                // Adderar beskrivning till FormData-objektet om descript inte är null
+                if (updatedProduct.description !== null) {
                     formData.append("description", updatedProduct.description);
                 }
 
