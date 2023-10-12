@@ -61,7 +61,7 @@ export default {
         // Tar bort meddelande efter 5 sekunder
         setTimeout(() => { this.message = "" }, 5000);
 
-        // Skickar token och name från respons till auth i stores
+      // Skickar token och name från respons till auth i stores
       } else {
         let token = data.token;
         let name = data.name;
