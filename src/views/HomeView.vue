@@ -1,15 +1,21 @@
 <template>
-  <h1>Logga in</h1>
-  <form @submit.prevent="loginUser()">
-    <label for="email">E-post:</label>
-    <input v-model="email" type="text" id="email" name="email" class="form-control">
-    <br>
-    <label for="password">Lösenord:</label>
-    <input v-model="password" type="password" id="password" name="password" class="form-control">
-    <br>
-    <input type="submit" value="Logga in">
-  </form>
-  <p class="font-bold text-red-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
+  <div class="flex items-center justify-center mt-20 md:mt-40 xl:mt-64 2xl:mt-80">
+    <div class="px-5 w-full max-w-xs md:max-w-md">
+      <h1 class="mb-5 md:mb-7 text-center">Logga in</h1>
+      <form @submit.prevent="loginUser()">
+        <label for="email">E-post:</label>
+        <br>
+        <input v-model="email" type="text" id="email" name="email" class="mb-1 md:mb-3">
+        <br>
+        <label for="password">Lösenord:</label>
+        <br>
+        <input v-model="password" type="password" id="password" name="password" class="mb-1 md:mb-3">
+        <br>
+        <input type="submit" value="Logga in" class="w-full mt-6 md:mt-7">
+      </form>
+      <p class="text-center text-red-600 font-bold text-shadow w-full mt-6" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -55,7 +61,7 @@ export default {
         // Tar bort meddelande efter 5 sekunder
         setTimeout(() => { this.message = "" }, 5000);
 
-      // Skickar token och name från respons till auth i stores
+        // Skickar token och name från respons till auth i stores
       } else {
         let token = data.token;
         let name = data.name;

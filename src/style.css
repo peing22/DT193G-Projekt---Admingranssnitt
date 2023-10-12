@@ -15,9 +15,12 @@
         @apply text-base md:text-lg font-medium uppercase tracking-wider;
     }
 
-    p,
-    label {
+    p {
         @apply text-xs md:text-base;
+    }
+
+    label {
+        @apply text-xs md:text-base ms-2;
     }
 
     button,
@@ -29,7 +32,7 @@
     input[type="number"],
     select,
     input[type="password"] {
-        @apply text-black rounded-sm;
+        @apply text-black rounded-full text-xs md:text-base py-1 px-3 md:px-4 md:mt-1 w-full;
     }
 }
 
@@ -41,4 +44,8 @@ body {
     background-attachment: fixed;
     font-family: 'Montserrat', sans-serif;
     color: white;
+}
+
+.text-shadow {
+    text-shadow: 0 0 5px #000000, 0 0 10px #000000, 0 0 15px #000000;
 }
