@@ -1,12 +1,18 @@
 <template>
-    <div v-for="product in products" :key="product.id">
-        <h2>{{ product.name }}</h2>
-        <p v-if="product.description !== null">{{ product.description }}</p>
-        <p v-if="product.price !== null">Pris: {{ product.price }} kr</p>
-        <label for="quantity">Antal: </label>
-        <input type="number" id="quantity" v-model="product.quantity" @change="updateQuantity(product)">
-        <img :src="getProductImageUrl(product.image)" :alt="product.name">
-        <br>
+    <div v-for="product in products" :key="product.id"
+        class="bg-white/20 mb-6 md:mb-7 rounded-2xl p-5 max-w-xs break-words text-center">
+        <h2 class="text-center">{{ product.name }}</h2>
+        <div class="flex items-center justify-center">
+            <div class="mx-2">
+                <label for="quantity" class="ms-0">Antal i lager:</label>
+                <br>
+                <input type="number" id="quantity" v-model="product.quantity" @change="updateQuantity(product)"
+                    class="w-24 md:w-32 mb-2">
+            </div>
+            <img :src="getProductImageUrl(product.image)" :alt="product.name" class="rounded-md w-11 md:w-14 mx-2">
+        </div>
+        <p v-if="product.description" class="text-center">{{ product.description }}</p>
+        <p v-if="product.price">Pris: {{ product.price }} kr</p>
     </div>
 </template>
     
@@ -32,7 +38,7 @@ export default {
             if (imagePath !== null) {
                 return config.apiUrl + imagePath;
 
-            // Returnerar en standardbild
+                // Returnerar en standardbild
             } else {
                 return config.apiUrl + "uploads/default.jpg";
             }

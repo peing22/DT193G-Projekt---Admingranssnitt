@@ -1,9 +1,11 @@
 <template>
   <h1>Produkter</h1>
-  <CategorySelector :categories="categories" :selectedCategory="selectedCategory"
-    @update:selectedCategory="updateSelectedCategory" />
-  <div>
-    <ProductList :products="showProducts" />
+  <div class="px-5">
+    <CategorySelector :categories="categories" :selectedCategory="selectedCategory"
+      @update:selectedCategory="updateSelectedCategory" />
+    <div>
+      <ProductList :products="showProducts" />
+    </div>
   </div>
 </template>
 
@@ -44,7 +46,7 @@ export default {
       if (this.selectedCategory === "") {
         return this.products;
 
-      // Returnerar produkter för vald kategori
+        // Returnerar produkter för vald kategori
       } else {
         return this.selectedProducts;
       }

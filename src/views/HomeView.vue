@@ -1,15 +1,15 @@
 <template>
   <div class="flex items-center justify-center mt-20 md:mt-40 xl:mt-64 2xl:mt-80">
     <div class="px-5 w-full max-w-xs md:max-w-md">
-      <h1 class="mb-5 md:mb-7 text-center">Logga in</h1>
+      <h1>Logga in</h1>
       <form @submit.prevent="loginUser()">
         <label for="email">E-post:</label>
         <br>
-        <input v-model="email" type="text" id="email" name="email" class="mb-1 md:mb-3">
+        <input v-model="email" type="text" id="email" name="email" class="mb-1 md:mb-3 w-full">
         <br>
         <label for="password">Lösenord:</label>
         <br>
-        <input v-model="password" type="password" id="password" name="password" class="mb-1 md:mb-3">
+        <input v-model="password" type="password" id="password" name="password" class="mb-1 md:mb-3 w-full">
         <br>
         <input type="submit" value="Logga in" class="w-full mt-6 md:mt-7">
       </form>
