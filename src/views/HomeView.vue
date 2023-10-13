@@ -13,7 +13,7 @@
         <br>
         <input type="submit" value="Logga in" class="w-full mt-6 md:mt-7">
       </form>
-      <p class="text-center text-red-600 font-bold text-shadow w-full mt-6" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
+      <p class="text-center text-red-500 font-bold w-full mt-6" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
     </div>
   </div>
 </template>

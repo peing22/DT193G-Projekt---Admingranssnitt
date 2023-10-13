@@ -1,12 +1,14 @@
 <template>
-    <p class="font-bold text-green-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
     <h3>Lägg till kategori</h3>
     <form @submit.prevent="addCategory()">
-        <label for="catName">Namn: </label>
-        <input v-model="name" type="text" id="catName">
-        <input type="submit" value="Lägg till">
+        <label for="catName">Namn:</label>
+        <br>
+        <input v-model="name" type="text" id="catName" class="w-full">
+        <br>
+        <input type="submit" value="Lägg till" class="w-full mt-3 mb-2">
     </form>
-    <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
+    <p class="text-center font-bold text-red-500 mt-1" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
+    <p class="text-center font-bold text-green-500 mt-1" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
 </template>
 
 <script>
@@ -55,7 +57,7 @@ export default {
                 }
             // Skickar felmeddelande
             } else {
-                this.errorMessage = "Namn måste anges!";
+                this.errorMessage = "Ett namn måste anges!";
 
                 // Tar bort meddelande efter 5 sekunder
                 setTimeout(() => { this.errorMessage = "" }, 5000);

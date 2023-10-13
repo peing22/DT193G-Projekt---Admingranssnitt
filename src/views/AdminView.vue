@@ -3,18 +3,23 @@
     <div class="px-5">
         <div class="flex justify-center">
             <div class="w-full max-w-sm md:max-w-md">
-                <div class="bg-white/20 rounded-2xl py-3 md:py-5 px-5 md:px-7">
-                    <h2>Kategorier</h2>
-                    <h3>Befintliga kategorier</h3>
-                    <Categories v-for="category in categories" :category="category" :key="category.id"
-                        @editCategory="editCategory" @deleteCategory="deleteCategory" />
-                    <p class="font-bold text-green-700" :class="{ 'fade-out': msgCategory !== '' }">{{ msgCategory }}</p>
-                    <div v-if="editingCategory">
-                        <EditCategory :category="editingCategory" @categoryEdited="updateCategory"
-                            @cancelEdit="cancelEditCategory" />
+                <div class="bg-white/20 rounded-2xl p-5 pb-3 md:pt-6">
+                    <h2 class="mb-3 md:mb-4">Kategorier</h2>
+                    <div>
+                        <h3>Befintliga kategorier</h3>
+                        <Categories v-for="category in categories" :category="category" :key="category.id"
+                            @editCategory="editCategory" @deleteCategory="deleteCategory" />
                     </div>
-                    <div v-else>
-                        <AddCategory :token="token" @categoryAdded="getCategories()" />
+                    <p class="font-bold text-green-500" :class="{ 'fade-out': msgCategory !== '' }">{{
+                        msgCategory }}</p>
+                    <div class="mt-3">
+                        <div v-if="editingCategory">
+                            <EditCategory :category="editingCategory" @categoryEdited="updateCategory"
+                                @cancelEdit="cancelEditCategory" />
+                        </div>
+                        <div v-else>
+                            <AddCategory :token="token" @categoryAdded="getCategories()" />
+                        </div>
                     </div>
                 </div>
                 <br>
