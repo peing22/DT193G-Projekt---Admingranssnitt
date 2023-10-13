@@ -1,5 +1,5 @@
 <template>
-  <h1>Produkter</h1>
+  <h1 class="mb-6 md:mb-9">Produkter</h1>
   <div class="px-5">
     <CategorySelector :categories="categories" :selectedCategory="selectedCategory"
       @update:selectedCategory="updateSelectedCategory" />
@@ -46,7 +46,7 @@ export default {
       if (this.selectedCategory === "") {
         return this.products;
 
-        // Returnerar produkter för vald kategori
+      // Returnerar produkter för vald kategori
       } else {
         return this.selectedProducts;
       }

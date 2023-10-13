@@ -1,12 +1,12 @@
 <template>
-    <h1>Administrera</h1>
+    <h1 class="mb-9 md:mb-12">Administrera</h1>
     <div class="px-5">
         <div class="flex justify-center">
             <div class="w-full max-w-sm md:max-w-md">
-                <div class="bg-white/20 rounded-2xl p-5 pb-3 md:pt-7 mb-5">
-                    <h2 class="mb-4 md:mb-7">Kategorier</h2>
+                <section class="bg-white/20 rounded-2xl p-5 md:p-7 pb-3 md:pb-5 md:pt-9 mb-9 md:mb-12">
+                    <h2 class="mb-4 md:mb-7 border-solid border-b border-white/20 pb-5 md:pb-7">Kategorier</h2>
                     <div>
-                        <h3>Befintliga kategorier</h3>
+                        <h3 class="mb-2 md:mb-5">Befintliga kategorier</h3>
                         <Categories v-for="category in categories" :category="category" :key="category.id"
                             @editCategory="editCategory" @deleteCategory="deleteCategory" />
                     </div>
@@ -21,9 +21,9 @@
                             <AddCategory :token="token" @categoryAdded="getCategories()" />
                         </div>
                     </div>
-                </div>
-                <div class="bg-white/20 rounded-2xl p-5 pb-3 md:pt-7 mb-5">
-                    <h2 class="mb-4 md:mb-7">Produkter</h2>
+                </section>
+                <section class="bg-white/20 rounded-2xl p-5 md:p-7 pb-3 md:pb-5 md:pt-7 mb-9 md:mb-12">
+                    <h2 class="mb-4 md:mb-7 border-solid border-b border-white/20 pb-5 md:pb-7">Produkter</h2>
                     <SearchProduct :token="token" @searchedProductArray="searchedProductArray" />
                     <div v-if="showSearchedProduct">
                         <ShowProduct v-for="product in searchedProduct" :product="product" :key="product.id"
@@ -44,10 +44,11 @@
                             <AddProduct :categories="categories" :token="token" />
                         </div>
                     </div>
-                </div>
-                <br>
-                <h2>Användare</h2>
-                <AddUser :token="token" />
+                </section>
+                <section class="bg-white/20 rounded-2xl p-5 md:p-7 pb-3 md:pb-5 md:pt-7 mb-9 md:mb-12">
+                    <h2 class="mb-4 md:mb-7 border-solid border-b border-white/20 pb-5 md:pb-7">Användare</h2>
+                    <AddUser :token="token" />
+                </section>
             </div>
         </div>
     </div>
@@ -246,7 +247,7 @@ export default {
                     // Tar bort meddelande efter 5 sekunder
                     setTimeout(() => { this.msgProduct = "" }, 5000);
                 }
-                // Skickar felmeddelande
+            // Skickar felmeddelande
             } else {
                 this.errorMsgProduct = "Namn och antal måste anges!";
 

@@ -32,7 +32,7 @@ export default {
                 // Tar bort meddelande efter 5 sekunder
                 setTimeout(() => { this.errorMessage = "" }, 5000);
 
-                // Skickar event med kategori-id och kategori-namn till föräldrakomponent
+            // Skickar event med kategori-id och kategori-namn till föräldrakomponent
             } else {
                 this.$emit('categoryEdited', {
                     id: this.category.id,

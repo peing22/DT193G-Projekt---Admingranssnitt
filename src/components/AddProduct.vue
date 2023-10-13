@@ -83,11 +83,11 @@ export default {
             if (!allowedExtensions.includes(fileExtension)) {
                 this.imageMessage = "Filer av andra typer än JPEG, JPG, PNG, och GIF kommer inte laddas upp!";
 
-                // Skriver ut felmeddelande om filen är större än 2MB
+            // Skriver ut felmeddelande om filen är större än 2MB
             } else if (selectedFile.size > maxFileSize * 1024) {
                 this.imageMessage = "Filer större än 2MB kommer inte laddas upp!";
 
-                // Sätter värde för propertyn image och tömmer eventuellt felmeddelande
+            // Sätter värde för propertyn image och tömmer eventuellt felmeddelande
             } else {
                 this.image = selectedFile;
                 this.imageMessage = "";
@@ -152,7 +152,7 @@ export default {
                     // Tar bort meddelande efter 5 sekunder
                     setTimeout(() => { this.message = "" }, 5000);
                 }
-                // Skickar felmeddelande
+            // Skickar felmeddelande
             } else {
                 this.errorMessage = "Namn, kategori och antal måste anges!";
 

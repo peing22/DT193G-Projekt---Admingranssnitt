@@ -5,7 +5,7 @@
             <button @click="logoutUser()">Logga ut<i class="fa-solid fa-right-from-bracket ps-1 md:ps-2"></i></button>
         </div>
         <nav
-            class="bg-white/20 flex items-center justify-center py-3 md:py-7 mx-auto uppercase tracking-widest text-xs md:text-xl">
+            class="bg-white/20 flex items-center justify-center py-3 md:py-7 mx-auto uppercase tracking-widest text-xs md:text-xl font-light">
             <RouterLink to="/produkter"
                 class="border-solid border-y border-white/20 transition duration-300 ease-in-out hover:border-white/60 p-2 md:p-4 mx-3 md:mx-10"
                 :class="{ active: currentRoute === '/produkter' }">Produkter</RouterLink>

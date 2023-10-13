@@ -64,7 +64,7 @@ export default {
                         this.errorMessage = "";
                     }
                 }
-                // Skickar felmeddelande
+            // Skickar felmeddelande
             } else {
                 this.errorMessage = "Ett namn måste anges!";
 

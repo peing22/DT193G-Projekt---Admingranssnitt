@@ -4,21 +4,23 @@
 
 @layer base {
     h1 {
-        @apply text-2xl md:text-4xl font-medium uppercase tracking-widest text-center mb-5 md:mb-7;
+        @apply text-2xl md:text-4xl font-semibold uppercase tracking-widest text-center;
     }
 
     h2 {
-        @apply text-xl md:text-2xl font-medium uppercase tracking-widest md:mb-1 text-center;
+        @apply text-xl md:text-2xl font-semibold uppercase tracking-widest md:mb-1 text-center;
     }
 
     h3 {
-        @apply text-base md:text-lg font-medium uppercase tracking-wider md:mb-1 text-center;
+        @apply text-base md:text-lg font-medium uppercase tracking-widest md:mb-1 text-center;
     }
 
     p {
         @apply text-xs md:text-sm font-light;
     }
+}
 
+@layer components {
     label {
         @apply text-xs md:text-sm ms-2 font-light;
     }

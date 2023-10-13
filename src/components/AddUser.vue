@@ -1,22 +1,28 @@
 <template>
     <h3>Lägg till användare</h3>
     <form @submit.prevent="addUser()">
-        <label for="userName">Namn: </label>
-        <input v-model="name" type="text" id="userName" placeholder="Förnamn Efternamn">
+        <label for="userName">Namn:</label>
         <br>
-        <label for="email">E-post: </label>
-        <input v-model="email" type="email" id="email" placeholder="namn@mail.com">
+        <input v-model="name" type="text" id="userName" placeholder="Förnamn Efternamn"
+            class="w-full mb-3 placeholder:italic">
         <br>
-        <label for="password">Lösenord: </label>
-        <input v-model="password" type="password" id="password" placeholder="minst åtta tecken">
+        <label for="email">E-post:</label>
         <br>
-        <label for="repetedPassword">Upprepa lösenord: </label>
-        <input v-model="repetedPassword" type="password" id="repetedPassword" placeholder="samma som ovan">
+        <input v-model="email" type="email" id="email" placeholder="exempel@mail.com"
+            class="w-full mb-3 placeholder:italic">
         <br>
-        <input type="submit" value="Lägg till">
+        <label for="password">Lösenord: (minst åtta tecken)</label>
+        <br>
+        <input v-model="password" type="password" id="password" class="w-full mb-3">
+        <br>
+        <label for="repetedPassword">Upprepa lösenord:</label>
+        <br>
+        <input v-model="repetedPassword" type="password" id="repetedPassword" class="w-full mb-3">
+        <br>
+        <input type="submit" value="Lägg till" class="w-full mb-3">
     </form>
-    <p class="font-bold text-green-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
-    <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
+    <p class="font-bold text-green-500 text-center" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
+    <p class="font-bold text-red-500 text-center" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
 </template>
 
 <script>
@@ -80,14 +86,14 @@ export default {
                         // Tar bort meddelande efter 5 sekunder
                         setTimeout(() => { this.message = "" }, 5000);
                     }
-                    // Skickar felmeddelande
+                // Skickar felmeddelande
                 } else {
                     this.errorMessage = "Lösenorden stämmer inte överens!"
 
                     // Tar bort meddelande efter 5 sekunder
                     setTimeout(() => { this.errorMessage = "" }, 5000);
                 }
-                // Skickar felmeddelande
+            // Skickar felmeddelande
             } else {
                 this.errorMessage = "Ange korrekta uppgifter i alla fält!";
 
