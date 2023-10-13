@@ -1,18 +1,18 @@
 <template>
     <div v-for="product in products" :key="product.id"
-        class="bg-white/20 mb-6 md:mb-7 rounded-2xl p-5 max-w-xs break-words text-center">
-        <h2 class="text-center">{{ product.name }}</h2>
-        <div class="flex items-center justify-center">
+        class="bg-white/20 rounded-2xl py-3 px-5 w-full max-w-xs md:w-64 break-words">
+        <h2 class="text-center text-base md:text-lg">{{ product.name }}</h2>
+        <div class="flex items-center justify-center mb-2">
             <div class="mx-2">
-                <label for="quantity" class="ms-0">Antal i lager:</label>
+                <label for="quantity">Antal i lager:</label>
                 <br>
                 <input type="number" id="quantity" v-model="product.quantity" @change="updateQuantity(product)"
-                    class="w-24 md:w-32 mb-2">
+                    class="w-28 md:w-32">
             </div>
             <img :src="getProductImageUrl(product.image)" :alt="product.name" class="rounded-md w-11 md:w-14 mx-2">
         </div>
-        <p v-if="product.description" class="text-center">{{ product.description }}</p>
-        <p v-if="product.price">Pris: {{ product.price }} kr</p>
+        <p v-if="product.description" class="mt-2 text-center">{{ product.description }}</p>
+        <p v-if="product.price" class="mt-1 pt-1 text-center border-solid border-t border-white/20">Pris: {{ product.price }} kr</p>
     </div>
 </template>
     

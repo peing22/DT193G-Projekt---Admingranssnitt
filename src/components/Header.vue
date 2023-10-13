@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="flex items-center justify-end p-2">
-            <p class="mx-2">{{ message }}</p>
+            <p class="mx-2 text-base">{{ message }}</p>
             <button @click="logoutUser()">Logga ut<i class="fa-solid fa-right-from-bracket ps-1 md:ps-2"></i></button>
         </div>
         <nav
@@ -24,7 +24,7 @@ import { useAuthStore } from '../stores/auth'
 export default {
     data() {
         return {
-            message: "Inloggad som " + useAuthStore().$state.name,
+            message: "Inloggad: " + useAuthStore().$state.name,
             currentRoute: ""
         }
     },

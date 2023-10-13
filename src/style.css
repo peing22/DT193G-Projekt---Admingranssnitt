@@ -8,7 +8,7 @@
     }
 
     h2 {
-        @apply text-xl md:text-2xl font-medium uppercase tracking-widest mb-1 md:mb-3;
+        @apply text-xl md:text-2xl font-medium uppercase tracking-widest md:mb-1;
     }
 
     h3 {
@@ -16,11 +16,11 @@
     }
 
     p {
-        @apply text-xs md:text-base;
+        @apply text-xs md:text-sm font-light;
     }
 
     label {
-        @apply text-xs md:text-base ms-2;
+        @apply text-xs md:text-sm ms-2 font-light;
     }
 
     button,
@@ -32,7 +32,7 @@
     input[type="number"],
     select,
     input[type="password"] {
-        @apply text-black rounded-full text-xs md:text-base py-1 px-3 md:px-4 md:mt-1 focus:outline-black;
+        @apply text-black rounded-full text-xs md:text-sm py-1 px-3 md:mt-1 focus:outline-black;
     }
 }
 

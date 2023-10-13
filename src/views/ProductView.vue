@@ -3,7 +3,7 @@
   <div class="px-5">
     <CategorySelector :categories="categories" :selectedCategory="selectedCategory"
       @update:selectedCategory="updateSelectedCategory" />
-    <div>
+    <div class="flex flex-wrap justify-center gap-6 md:gap-7">
       <ProductList :products="showProducts" />
     </div>
   </div>
