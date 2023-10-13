@@ -3,16 +3,16 @@
     <div class="px-5">
         <div class="flex justify-center">
             <div class="w-full max-w-sm md:max-w-md">
-                <div class="bg-white/20 rounded-2xl p-5 pb-3 md:pt-6">
-                    <h2 class="mb-3 md:mb-4">Kategorier</h2>
+                <div class="bg-white/20 rounded-2xl p-5 pb-3 md:pt-7 mb-5">
+                    <h2 class="mb-4 md:mb-7">Kategorier</h2>
                     <div>
                         <h3>Befintliga kategorier</h3>
                         <Categories v-for="category in categories" :category="category" :key="category.id"
                             @editCategory="editCategory" @deleteCategory="deleteCategory" />
                     </div>
-                    <p class="font-bold text-green-500" :class="{ 'fade-out': msgCategory !== '' }">{{
+                    <p class="font-bold text-green-500 text-center" :class="{ 'fade-out': msgCategory !== '' }">{{
                         msgCategory }}</p>
-                    <div class="mt-3">
+                    <div class="mt-4 md:mt-7">
                         <div v-if="editingCategory">
                             <EditCategory :category="editingCategory" @categoryEdited="updateCategory"
                                 @cancelEdit="cancelEditCategory" />
@@ -22,25 +22,27 @@
                         </div>
                     </div>
                 </div>
-                <br>
-                <div>
-                    <h2>Produkter</h2>
+                <div class="bg-white/20 rounded-2xl p-5 pb-3 md:pt-7 mb-5">
+                    <h2 class="mb-4 md:mb-7">Produkter</h2>
                     <SearchProduct :token="token" @searchedProductArray="searchedProductArray" />
                     <div v-if="showSearchedProduct">
-                        <h3>Sökresultat</h3>
                         <ShowProduct v-for="product in searchedProduct" :product="product" :key="product.id"
                             @editProduct="editProduct" @deleteProduct="deleteProduct" />
                     </div>
-                    <p class="font-bold text-green-700" :class="{ 'fade-out': msgProduct !== '' }">{{ msgProduct }}</p>
-                    <div v-if="editingProduct">
-                        <EditProduct :product="editingProduct" :categories="categories" @productEdited="updateProduct"
-                            @cancelEdit="cancelEditProduct" />
-                        <p class="font-bold text-red-700" :class="{ 'fade-out': errorMsgProduct !== '' }">{{ errorMsgProduct
-                        }}
-                        </p>
-                    </div>
-                    <div v-else>
-                        <AddProduct :categories="categories" :token="token" />
+                    <p class="font-bold text-green-500 text-center" :class="{ 'fade-out': msgProduct !== '' }">{{ msgProduct
+                    }}</p>
+                    <div class="mt-4 md:mt-7">
+                        <div v-if="editingProduct">
+                            <EditProduct :product="editingProduct" :categories="categories" @productEdited="updateProduct"
+                                @cancelEdit="cancelEditProduct" />
+                            <p class="font-bold text-red-500 text-center" :class="{ 'fade-out': errorMsgProduct !== '' }">{{
+                                errorMsgProduct
+                            }}
+                            </p>
+                        </div>
+                        <div v-else>
+                            <AddProduct :categories="categories" :token="token" />
+                        </div>
                     </div>
                 </div>
                 <br>

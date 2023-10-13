@@ -4,7 +4,7 @@
             <p class="text-sm md:text-base">{{ category.name }}</p>
             <div>
                 <button @click="$emit('editCategory', category)"
-                    class="bg-yellow-500/20 hover:bg-yellow-500/40 me-1">Ändra<i
+                    class="me-1">Ändra<i
                         class="fa-solid fa-pen-to-square ps-1 md:ps-2"></i></button>
                 <button @click="confirmDelete" class="bg-red-500/20 hover:bg-red-500/40">Radera<i
                         class="fa-regular fa-trash-can ps-1 md:ps-2"></i></button>
@@ -13,7 +13,7 @@
         <div v-if="showConfirmation" class="py-2">
             <p class="pb-3">Alla produkter som tillhör denna kategori kommer att försvinna. Är du säker på att du vill
                 radera kategorin?</p>
-            <button @click="deleteCategory">Radera<i class="fa-regular fa-trash-can ps-1 md:ps-2"></i></button>
+            <button @click="deleteCategory" class="bg-red-500/20 hover:bg-red-500/40">Radera<i class="fa-regular fa-trash-can ps-1 md:ps-2"></i></button>
             <button @click="cancelDelete" class="ms-1">Avbryt</button>
         </div>
     </div>

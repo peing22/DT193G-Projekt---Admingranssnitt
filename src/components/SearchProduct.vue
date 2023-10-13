@@ -1,12 +1,15 @@
 <template>
     <h3>Sök produkt</h3>
     <form @submit.prevent="searchProduct()">
-        <label for="search">Namn: </label>
-        <input type="text" v-model="searchInput" id="search">
-        <input type="submit" value="Sök">
-        <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
-        <p class="font-bold text-orange-500" :class="{ 'fade-out': warningMessage !== '' }">{{ warningMessage }}</p>
+        <label for="search">Namn:</label>
+        <br>
+        <input type="text" v-model="searchInput" id="search" class="w-full">
+        <br>
+        <input type="submit" value="Sök" class="w-full mt-3 mb-2">
     </form>
+    <p class="text-center font-bold text-red-500 mt-1" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
+    <p class="text-center font-bold text-orange-500 mt-1" :class="{ 'fade-out': warningMessage !== '' }">{{ warningMessage
+    }}</p>
 </template>
 
 <script>
@@ -61,9 +64,9 @@ export default {
                         this.errorMessage = "";
                     }
                 }
-            // Skickar felmeddelande
+                // Skickar felmeddelande
             } else {
-                this.errorMessage = "Namn måste anges!";
+                this.errorMessage = "Ett namn måste anges!";
 
                 // Tar bort meddelande efter 5 sekunder
                 setTimeout(() => { this.errorMessage = "" }, 5000);

@@ -8,11 +8,11 @@
     }
 
     h2 {
-        @apply text-xl md:text-2xl font-medium uppercase tracking-widest md:mb-1;
+        @apply text-xl md:text-2xl font-medium uppercase tracking-widest md:mb-1 text-center;
     }
 
     h3 {
-        @apply text-base md:text-lg font-medium uppercase tracking-wider md:mb-1;
+        @apply text-base md:text-lg font-medium uppercase tracking-wider md:mb-1 text-center;
     }
 
     p {
@@ -31,8 +31,13 @@
     input[type="text"],
     input[type="number"],
     select,
+    input[type="email"],
     input[type="password"] {
         @apply text-black rounded-full text-xs md:text-sm py-1 px-3 md:mt-1 focus:outline-black;
+    }
+
+    textarea {
+        @apply text-black rounded-2xl text-xs md:text-sm py-1 px-3 md:mt-1 focus:outline-black;
     }
 }
 

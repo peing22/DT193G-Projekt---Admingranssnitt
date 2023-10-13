@@ -1,31 +1,42 @@
 <template>
     <h3>Lägg till produkt</h3>
     <form ref="productForm" @submit.prevent="addProduct()">
-        <label for="productName">Namn: </label>
-        <input v-model="name" type="text" id="productName">
+        <label for="productName">Namn:</label>
         <br>
-        <label for="descript">Beskrivning: </label>
-        <input v-model="descript" type="text" id="descript">
+        <input v-model="name" type="text" id="productName" class="w-full mb-3">
         <br>
-        <label for="price">Pris: </label>
-        <input v-model="price" type="number" id="price">
+        <label for="descript">Beskrivning:</label>
         <br>
-        <label for="quantity">Antal: </label>
-        <input v-model="quantity" type="number" id="quantity">
+        <textarea v-model="descript" name="descript" id="descript" rows="1" class="w-full mb-1"></textarea>
         <br>
-        <label for="image">Bild: </label>
-        <input @change="imageSelected" type="file" id="image">
-        <p v-if="imageMessage" class="font-bold text-red-700">{{ imageMessage }}</p>
-        <br v-else>
-        <label for="category">Kategori: </label>
-        <select id="category" :value="selectedCategory" @input="updateSelectedCategory">
+        <label for="category">Kategori:</label>
+        <br>
+        <select id="category" :value="selectedCategory" @input="updateSelectedCategory" class="w-full mb-3">
             <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
         </select>
         <br>
-        <input type="submit" value="Lägg till">
+        <div class="w-full flex">
+            <div class="w-full me-2">
+                <label for="quantity">Antal:</label>
+                <br>
+                <input v-model="quantity" type="number" id="quantity" class="w-full mb-3">
+            </div>
+            <div class="w-full ms-2">
+                <label for="price">Pris:</label>
+                <br>
+                <input v-model="price" type="number" id="price" class="w-full mb-3">
+            </div>
+        </div>
+        <label for="image">Bild:</label>
+        <br>
+        <input @change="imageSelected" type="file" id="image"
+            class="text-xs md:text-sm file:text-white file:rounded-full file:py-1 file:px-3 md:file:px-4 md:file:mt-1 file:uppercase file:cursor-pointer file:bg-white/20 file:transition file:duration-300 file:ease-in-out file:hover:bg-white/40 file:border-solid file:border file:border-white/20 file:font-medium file:tracking-widest">
+        <p v-if="imageMessage" class="text-center font-bold text-red-500 mt-2">{{ imageMessage }}</p>
+        <br v-else>
+        <input type="submit" value="Lägg till" class="w-full mt-3 mb-3">
     </form>
-    <p class="font-bold text-green-700" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
-    <p class="font-bold text-red-700" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
+    <p class="font-bold text-green-500 text-center" :class="{ 'fade-out': message !== '' }">{{ message }}</p>
+    <p class="font-bold text-red-500 text-center" :class="{ 'fade-out': errorMessage !== '' }">{{ errorMessage }}</p>
 </template>
 
 <script>
@@ -72,11 +83,11 @@ export default {
             if (!allowedExtensions.includes(fileExtension)) {
                 this.imageMessage = "Filer av andra typer än JPEG, JPG, PNG, och GIF kommer inte laddas upp!";
 
-            // Skriver ut felmeddelande om filen är större än 2MB
+                // Skriver ut felmeddelande om filen är större än 2MB
             } else if (selectedFile.size > maxFileSize * 1024) {
                 this.imageMessage = "Filer större än 2MB kommer inte laddas upp!";
 
-            // Sätter värde för propertyn image och tömmer eventuellt felmeddelande
+                // Sätter värde för propertyn image och tömmer eventuellt felmeddelande
             } else {
                 this.image = selectedFile;
                 this.imageMessage = "";
@@ -141,9 +152,9 @@ export default {
                     // Tar bort meddelande efter 5 sekunder
                     setTimeout(() => { this.message = "" }, 5000);
                 }
-            // Skickar felmeddelande
+                // Skickar felmeddelande
             } else {
-                this.errorMessage = "Namn, antal och kategori måste anges!";
+                this.errorMessage = "Namn, kategori och antal måste anges!";
 
                 // Tar bort meddelande efter 5 sekunder
                 setTimeout(() => { this.errorMessage = "" }, 5000);
