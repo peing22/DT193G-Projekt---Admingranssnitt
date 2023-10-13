@@ -1,40 +1,49 @@
 <template>
     <h1>Administrera</h1>
-    <div>
-        <h2>Kategorier</h2>
-        <h3>Befintliga kategorier</h3>
-        <Categories v-for="category in categories" :category="category" :key="category.id" @editCategory="editCategory"
-            @deleteCategory="deleteCategory" />
-        <p class="font-bold text-green-700" :class="{ 'fade-out': msgCategory !== '' }">{{ msgCategory }}</p>
-        <div v-if="editingCategory">
-            <EditCategory :category="editingCategory" @categoryEdited="updateCategory" @cancelEdit="cancelEditCategory" />
-        </div>
-        <div v-else>
-            <AddCategory :token="token" @categoryAdded="getCategories()" />
+    <div class="px-5">
+        <div class="flex justify-center">
+            <div class="w-full max-w-sm md:max-w-md">
+                <div class="bg-white/20 rounded-2xl py-3 md:py-5 px-5 md:px-7">
+                    <h2>Kategorier</h2>
+                    <h3>Befintliga kategorier</h3>
+                    <Categories v-for="category in categories" :category="category" :key="category.id"
+                        @editCategory="editCategory" @deleteCategory="deleteCategory" />
+                    <p class="font-bold text-green-700" :class="{ 'fade-out': msgCategory !== '' }">{{ msgCategory }}</p>
+                    <div v-if="editingCategory">
+                        <EditCategory :category="editingCategory" @categoryEdited="updateCategory"
+                            @cancelEdit="cancelEditCategory" />
+                    </div>
+                    <div v-else>
+                        <AddCategory :token="token" @categoryAdded="getCategories()" />
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <h2>Produkter</h2>
+                    <SearchProduct :token="token" @searchedProductArray="searchedProductArray" />
+                    <div v-if="showSearchedProduct">
+                        <h3>Sökresultat</h3>
+                        <ShowProduct v-for="product in searchedProduct" :product="product" :key="product.id"
+                            @editProduct="editProduct" @deleteProduct="deleteProduct" />
+                    </div>
+                    <p class="font-bold text-green-700" :class="{ 'fade-out': msgProduct !== '' }">{{ msgProduct }}</p>
+                    <div v-if="editingProduct">
+                        <EditProduct :product="editingProduct" :categories="categories" @productEdited="updateProduct"
+                            @cancelEdit="cancelEditProduct" />
+                        <p class="font-bold text-red-700" :class="{ 'fade-out': errorMsgProduct !== '' }">{{ errorMsgProduct
+                        }}
+                        </p>
+                    </div>
+                    <div v-else>
+                        <AddProduct :categories="categories" :token="token" />
+                    </div>
+                </div>
+                <br>
+                <h2>Användare</h2>
+                <AddUser :token="token" />
+            </div>
         </div>
     </div>
-    <br>
-    <div>
-        <h2>Produkter</h2>
-        <SearchProduct :token="token" @searchedProductArray="searchedProductArray" />
-        <div v-if="showSearchedProduct">
-            <h3>Sökresultat</h3>
-            <ShowProduct v-for="product in searchedProduct" :product="product" :key="product.id" @editProduct="editProduct"
-                @deleteProduct="deleteProduct" />
-        </div>
-        <p class="font-bold text-green-700" :class="{ 'fade-out': msgProduct !== '' }">{{ msgProduct }}</p>
-        <div v-if="editingProduct">
-            <EditProduct :product="editingProduct" :categories="categories" @productEdited="updateProduct"
-                @cancelEdit="cancelEditProduct" />
-            <p class="font-bold text-red-700" :class="{ 'fade-out': errorMsgProduct !== '' }">{{ errorMsgProduct }}</p>
-        </div>
-        <div v-else>
-            <AddProduct :categories="categories" :token="token" />
-        </div>
-    </div>
-    <br>
-    <h2>Användare</h2>
-    <AddUser :token="token" />
 </template>
 
 <script>
@@ -230,7 +239,7 @@ export default {
                     // Tar bort meddelande efter 5 sekunder
                     setTimeout(() => { this.msgProduct = "" }, 5000);
                 }
-            // Skickar felmeddelande
+                // Skickar felmeddelande
             } else {
                 this.errorMsgProduct = "Namn och antal måste anges!";
 
