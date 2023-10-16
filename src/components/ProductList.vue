@@ -9,7 +9,7 @@
                 <input type="number" id="quantity" v-model="product.quantity" @change="updateQuantity(product)"
                     class="w-28 md:w-32">
             </div>
-            <img :src="getProductImageUrl(product.image)" :alt="product.name" class="rounded-md w-11 md:w-14 mx-2">
+            <img :src="getProductImageUrl(product.image)" :alt="product.name" class="rounded-lg mt-3 w-10 md:mt-2 md:w-12 mx-2">
         </div>
         <p v-if="product.description" class="mt-2 text-center">{{ product.description }}</p>
         <p v-if="product.price" class="mt-1 pt-1 text-center border-solid border-t border-white/20">Pris: {{ product.price
