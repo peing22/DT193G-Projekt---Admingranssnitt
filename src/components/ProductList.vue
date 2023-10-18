@@ -41,7 +41,7 @@ export default {
 
             // Returnerar en standardbild
             } else {
-                return config.apiUrl + "uploads/default.jpg";
+                return "/default.jpg"
             }
         },
         async updateQuantity(product) {
