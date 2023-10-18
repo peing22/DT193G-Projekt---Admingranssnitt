@@ -29,7 +29,7 @@
                         <ShowProduct v-for="product in searchedProduct" :product="product" :key="product.id"
                             @editProduct="editProduct" @deleteProduct="deleteProduct" />
                     </div>
-                    <p class="font-bold text-green-500 text-center" :class="{ 'fade-out': msgProduct !== '' }">{{ msgProduct
+                    <p class="font-bold text-green-500 text-center" :class="{ 'fade-out': msgDeleteProduct !== '' }">{{ msgDeleteProduct
                     }}</p>
                     <div class="mt-4 md:mt-7">
                         <div v-if="editingProduct">
@@ -44,6 +44,8 @@
                             <AddProduct :categories="categories" :token="token" />
                         </div>
                     </div>
+                    <p class="font-bold text-green-500 text-center" :class="{ 'fade-out': msgProduct !== '' }">{{ msgProduct
+                    }}</p>
                 </section>
                 <section class="bg-white/20 rounded-2xl p-5 md:p-7 pb-3 md:pb-5 md:pt-7 mb-9 md:mb-12">
                     <h2 class="mb-4 md:mb-7 border-solid border-b border-white/20 pb-5 md:pb-7">Användare</h2>
@@ -77,7 +79,8 @@ export default {
             showSearchedProduct: false,
             editingProduct: null,
             msgProduct: "",
-            errorMsgProduct: ""
+            errorMsgProduct: "",
+            msgDeleteProduct: ""
         }
     },
     components: {
@@ -276,10 +279,10 @@ export default {
                 this.showSearchedProduct = false;
 
                 // Skickar meddelande
-                this.msgProduct = 'Produkten "' + product.name + '" har raderats'
+                this.msgDeleteProduct = 'Produkten "' + product.name + '" har raderats'
 
                 // Tar bort meddelande efter 5 sekunder
-                setTimeout(() => { this.msgProduct = "" }, 5000);
+                setTimeout(() => { this.msgDeleteProduct = "" }, 5000);
             }
         }
     },
