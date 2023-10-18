@@ -1,7 +1,6 @@
-# Vue 3 + Vite
+# DT193G Projekt - Vue + Tailwind CSS klientapplikation
+Detta repo innehåller ett klientapplikation (SPA) skapad med Vue.js och Tailwind CSS.
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Klientapplikationen konsumerar en REST-webbtjänst för att logga in redan registrerade användare som, väl inloggade, har möjlighet att se och hanterar data om företaget Blomsterhallens olika produkter och de kategorier som produkterna tillhör. Det är även möjligt för inloggade användare att registrera nya användarkonton. 
 
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+Om en icke inloggad användare försöker komma åt de delar av klientapplikationen som kräver inloggning, omdirigeras användaren till startsidan för inloggning.
