@@ -27,7 +27,6 @@ export default {
     },
     data() {
         return {
-            // Lagrar token
             token: useAuthStore().$state.token,
             message: ""
         }
