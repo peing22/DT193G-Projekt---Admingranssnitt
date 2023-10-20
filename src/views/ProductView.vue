@@ -19,19 +19,10 @@ import config from '../config'
 export default {
   data() {
     return {
-      // Lagrar produktkategorier
       categories: [],
-
-      // Lagrar tom textsträng eller vald kategori
       selectedCategory: "",
-
-      // Lagrar samtliga produkter
       products: [],
-
-      // Lagrar valda produkter utifrån kategori
       selectedProducts: [],
-
-      // Lagrar token
       token: useAuthStore().$state.token
     }
   },
