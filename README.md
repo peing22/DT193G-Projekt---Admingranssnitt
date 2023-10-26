@@ -6,4 +6,4 @@ Klientapplikationen konsumerar en REST-webbtjänst för att logga in registrerad
 Om en icke inloggad användare försöker komma åt de delar av klientapplikationen som kräver inloggning, omdirigeras användaren till startsidan för inloggning.
 
 Inställning för URL till den REST-webbtjänst som ska konsumeras görs i filen *src/config.js*.  
-Nuvarande inställning: http://127.0.0.1:8000/.
+Nuvarande inställning är http://127.0.0.1:8000/.
