@@ -5,10 +5,4 @@ Klientapplikationen konsumerar en REST-webbtjänst för att logga in registrerad
 
 Om en icke inloggad användare försöker komma åt de delar av klientapplikationen som kräver inloggning, omdirigeras användaren till startsidan för inloggning.
 
-Inställning för URL till den REST-webbtjänst som ska konsumeras görs i filen *src/config.js*.  
-Nuvarande inställning går till lokal server http://127.0.0.1:8000/.
-
-## Komponenter
-Klientapplikationen är uppbyggd av följande komponenter:
-
-<img width="587" alt="components" src="https://github.com/Webbutvecklings-programmet/projekt---klient-applikation-peing22/assets/122534725/0fa8ba0b-1a37-43f7-85c4-e63582d98071">
+Inställning för URL till REST-webbtjänst görs i filen *src/config.js*.  
